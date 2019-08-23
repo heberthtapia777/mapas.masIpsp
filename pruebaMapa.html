@@ -1,0 +1,310 @@
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/sweetalerts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/index.css') }}"/>
+{% endblock stylesheets %}
+<html>
+<head>
+    <title>Leaflet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <style type="text/css">
+      .leaflet-control-attribution{
+        display: none;
+      }
+    </style>
+</head>
+<body>
+<div style="margin: 0 auto; text-align: center;">
+    <!-- inicio select de ciudad -->
+    <select id="valCiudad" style="float: left; margin-left: 10px; margin-right: 10px;">
+        {% for city in cities %}
+            <option class="{{ city.idCity }}" value="{{ city.idCity }}">{{ city.name }}</option>
+        {% endfor %}
+    </select>
+    <!-- fin select de ciudad -->
+    <!-- inicio div tipos de entrenamiento -->
+    <div class="tiposEntrenamiento">
+        {% for t in tipos %}
+            <button onClick="validarTipo(this.id);" id="{{ t.id }}">{{ t.name }}</button>
+        {% endfor %}
+    </div>
+</div>
+
+    <div style="clear: both; margin-bottom: 10px;"></div>
+    <!-- fin div tipos de entrenamiento -->
+    <!-- inicio div mapa -->
+        <div id="mapid" style="width: 600px; height: 400px; float: left;"></div>
+    <!-- fin div mapa -->
+
+<!-- JS -->
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.min.js"></script> 
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+<script>
+      var movil = false;
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+           movil = true;
+        }
+      var marker = new Array();
+      var markerBackup = new Array();
+      var markerAux = new Array();
+      var data ="{{branches|serialize('json')}}";
+      var availableTags = JSON.parse(data.replace(/&quot;/g,'"').replace('amp;',''));
+      var mymap = L.map('mapid',{
+          center:[4.6682, -74.071],
+          zoom:13,
+          scrollWheelZoom:false,
+      });
+
+
+      // iconos de markers personalizados
+      var iconDefault = "{{ asset('public/img/markerDefault.png', absolute=true) }}";
+      var iconActive = "{{ asset('public/img/markerActive.png', absolute=true) }}";
+      var defaultMarker = L.icon({
+          iconUrl: iconDefault,
+      });
+      var activeMarker = L.icon({
+          iconUrl: iconActive,
+      });
+
+      // este for pinta todos los markers en el mapa cuando se carga el home
+      for(var key=0; key<availableTags.length; key++) {
+          var single = availableTags[key];
+          var LamMarker = L.marker([single.lat, single.lng],{ icon: defaultMarker, sede: single.name, studio: single.tradename, logo: single.logo, address: single.address, scoreP: single.scorePorcentaje, scoreV: single.scoreVotos, taked: single.taked, idStudio: single.studio});
+          marker.push(LamMarker);
+          marker[key].on('click', onClick);
+          mymap.addLayer(marker[key]);
+      }
+
+      // llamado obligatorio al API de mapbox
+       L.tileLayer('API_MAPBOX', {
+          maxZoom: 18,
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+              '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+              'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+          id: 'mapbox.streets'
+      }).addTo(mymap);
+
+     // variable global donde se carga la capa flotante
+     var info;
+     // variable global donde se guarda la ruta de la imagen
+     var img; 
+     // capa flotante donde se muestra la info al darle click sobre un maker
+     function capa(data){
+
+          if (info != undefined) { // se valida si existe informacion en la capa, si es borra la capa
+              info.remove(mymap); // esta linea quita la capa flotante
+          }
+
+          info = L.control({position: 'bottomleft'});
+
+          info.onAdd = function (mymap) {
+              this._div = L.DomUtil.create('div', 'info');
+              this.update(data);
+              return this._div;
+          };
+
+          info.update = function (data) {
+            var clases;
+            if(data.clases != undefined){
+                clases = data.clases.split(',');
+                var aux;
+                for(var i=0;i<clases.length;i++){
+                    aux += '<li class="quick500 blue-4">• ' + clases[i] + '</li>';
+                }
+            }
+            var url = 'https://www.fitpal.co/perfil/studio/'+data.idStudio;
+            if(aux!=undefined){
+                aux = aux.substring(9);
+            }
+            this._div.innerHTML = '<div class="fa fa-close" style="cursor:pointer;" id="closeBtn"></div>'+ x +'<h2 class="poppins600 blue-3">Centro: ' + data.studio + '</h2><h3 class="poppins500 blue-4">Sede: ' + data.sede + '</h3><p>Calificación: ' + Math.round(data.scoreP) + ' de ' + data.scoreV + ' votos</p><p>' + data.taked + ' usuarios han asistido a clases</p><p class="quick500 blue-3"><span class="poppins600">Dirección: </span>' + data.address  +
+                '<a class="green-btn-complete montserrat400" href="' + url + '" target="_blank">VER PERFIL Y CLASES<span class="fa fa-arrow-right"></span></a>';
+        };
+          info.addTo(mymap);
+      }
+
+      // variable que guarda los detalles del marker al que se le dio click
+      var eventBackup;
+      // variable auxiliar que guarda el tag img con su src
+      var x;
+      // funcion que se ejecuta cuando se da click sobre un maker del mapa
+      function onClick(e) {
+        var i = this.options;
+        console.log(i);
+        var idS = i.idStudio;
+        var urlLogo = "{{ path('rocket_seller_two_pick_logo_mapas') }}";
+        $.ajax({
+            url: urlLogo,
+            data:{idStudio:idS},
+            dataType: "html",
+            method: "POST",
+            success:function(resp){
+                var l = resp;
+                x = '<img onerror="$(this).hide();" src=' + l + '>';
+                if(movil == false){
+                  e.target.setIcon(activeMarker);
+                  if (eventBackup == undefined) {
+                    eventBackup = e;
+                    capa(i);
+                  } else {
+                    eventBackup.target.setIcon(defaultMarker);
+                    eventBackup = e;
+                    capa(i);
+                  }
+                } else {
+                  var url = 'https://www.fitpal.co/perfil/studio/'+i.idStudio;
+                  var c = 
+                  x+'<h2 class="poppins600 blue-3">Centro: ' + i.studio + '</h2><h3 class="poppins500 blue-4">Sede: ' + i.sede + '</h3><p>Calificación: ' + Math.round(i.scoreP) + ' de ' + i.scoreV + ' votos</p><p>' + i.taked + ' usuarios han asistido a clases</p><p class="quick500 blue-3"><span class="poppins600">Dirección: </span>' + i.address  +
+                      '<a style="cursor:pointer;" class="green-btn-complete montserrat400" href="' + url + '" target="_blank">VER PERFIL Y CLASES<span class="fa fa-arrow-right"></span></a>';
+                  showModal(c);
+                }
+            },
+        });
+      }
+      // funcion que cierra la capa flotante
+      $(document).on('click','#closeBtn', function(){
+          info.remove(mymap);
+          eventBackup.target.setIcon(defaultMarker);
+      });
+
+      // funcion que detecta el cambio en el select de ciudad
+      $(document).on('change','#valCiudad',function(e){
+          if (info != undefined) {
+              info.remove(mymap);
+          }
+          $('.tiposEntrenamiento button').removeClass('selected');
+          var ciudad = $('#valCiudad').val();
+          limpiarMapaDefault();
+          var url = "{{ path('rocket_seller_two_pick_data_mapas') }}";
+          if(ciudad == '2'){
+              mymap.panTo(new L.LatLng(6.217, -75.567));
+              $('#divEntrenos').hide();
+              $.ajax({
+                  url: url,
+                  data:{ciudad:ciudad},
+                  dataType: "html",
+                  method: "POST",
+                  success:function(resp){
+                      var availableTags = JSON.parse(resp.replace(/&quot;/g,'"').replace('amp;',''));
+                      for(var key=0; key<availableTags.length; key++) {
+                          var single = availableTags[key];
+                          var LamMarker = L.marker([single.lat, single.lng],{ icon: defaultMarker, sede: single.name, studio: single.tradename, logo: single.logo, address: single.address, scoreP: single.scorePorcentaje, scoreV: single.scoreVotos, taked: single.taked, idStudio: single.studio});
+                          marker.push(LamMarker);
+                          marker[key].on('click', onClick);
+                          mymap.addLayer(marker[key]);
+                      }
+                      markerBackup = [];
+                      markerBackup = marker;
+                  },
+              });
+          } else if(ciudad == '1') {
+              mymap.panTo(new L.LatLng(4.6682, -74.071));
+              $('#divEntrenos').show();
+              $.ajax({
+                  url: url,
+                  data:{ciudad:ciudad},
+                  dataType: "html",
+                  method: "POST",
+                  success:function(resp){
+                      var availableTags = JSON.parse(resp.replace(/&quot;/g,'"').replace('amp;',''));
+                      for(var key=0; key<availableTags.length; key++) {
+                          var single = availableTags[key];
+                          var LamMarker = L.marker([single.lat, single.lng],{ icon: defaultMarker, sede: single.name, studio: single.tradename, logo: single.logo, address: single.address, scoreP: single.scorePorcentaje, scoreV: single.scoreVotos, taked: single.taked, idStudio: single.studio});
+                          marker.push(LamMarker);
+                          marker[key].on('click', onClick);
+                          mymap.addLayer(marker[key]);
+                      }
+                      markerBackup = [];
+                      markerBackup = marker;
+                  },
+              });
+          }
+
+      });
+
+      function showModal(c){
+        console.log(c);
+        swal({ 
+          html:c,
+          showCloseButton: true,
+          showCancelButton: false,
+          showConfirmButton: false,
+          allowOutsideClick:false,
+          allowEscapeKey:false,
+
+        });
+      };
+
+      // esta funcion valida el tipo de entrenamiento
+
+      function validarTipo(id){
+          if (info != undefined) {
+              info.remove(mymap);
+          }
+          $('.tiposEntrenamiento button').removeClass('selected');
+          $('#'+id).addClass('selected');
+          var ciudad = $('#valCiudad').val();
+          var nombre = $('.tiposEntrenamiento #'+id).text();
+          limpiarMapaDefault();
+          limpiarMapaBackup();
+          var url = "{{ path('rocket_seller_two_pick_tipo_mapas') }}";
+          if(id == 'all'){
+            for(var key=0; key<markerBackup.length; key++) {
+                markerBackup[key].on('click', onClick);
+                mymap.addLayer(markerBackup[key]);
+            }
+        } else {
+            $.ajax({
+                url: url,
+                data:{id:id,ciudad:ciudad},
+                dataType: "html",
+                method: "POST",
+                success:function(resp){
+
+                      var availableTags = JSON.parse(resp.replace(/&quot;/g,'"').replace('amp;',''));
+                      for(var key=0; key<availableTags.length; key++) {
+                          var single = availableTags[key];
+                          var LamMarker = L.marker([single.lat, single.lng],{ icon: defaultMarker, sede: single.name, studio: single.tradename, logo: single.logo, address: single.address, scoreP: single.scorePorcentaje, scoreV: single.scoreVotos, taked: single.taked, idStudio: single.studio});
+                          marker.push(LamMarker);
+                          marker[key].on('click', onClick);
+                          mymap.addLayer(marker[key]);
+                      }
+                },
+            });
+        }
+
+
+    }
+
+    //esta funcion quita la capa flotante cuando hacen zoom
+    /*
+     mymap.on('zoom', function() {
+     if (info != undefined) {
+     info.remove(mymap);
+     }
+     });
+     */
+
+    //esta funcion limpia el mapa
+
+    function limpiarMapaDefault() {
+        for(i=0;i<marker.length;i++) {
+            mymap.removeLayer(marker[i]);
+        }
+        marker = [];
+    }
+
+    function limpiarMapaBackup() {
+        for(i=0;i<markerBackup.length;i++) {
+            mymap.removeLayer(markerBackup[i]);
+        }
+    }
+
+</script>
+<!-- /JS -->
+</body>
+</html>
