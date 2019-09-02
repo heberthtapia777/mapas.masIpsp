@@ -44,6 +44,9 @@
             li {
                 margin:0 0 2px 18px;
             }
+            #myModal.modal{
+                left: auto;
+            }flex-wrap:
         </style>
     </head>
 <body>
@@ -156,12 +159,12 @@ function capa(data){
       // variable auxiliar que guarda el tag img con su src
       var x;
       // funcion que se ejecuta cuando se da click sobre un maker del mapa
-function onClick(e) {
+/*function onClick(e) {
     var i = this.options;
         console.log(i);
         c='abre modal.....'+e;
         showModal(c);
-      }
+      }*/
 
 function showModal(c){
         //console.log(c);
@@ -185,22 +188,44 @@ function showModal(c){
 </script>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <table id="datos">
+                    <caption>table title and/or explanatory text</caption>
+                    <thead>
+                        <tr>
+                            <th># MESA</th>
+                            <th>PVB-IEP</th>
+                            <th>MSM</th>
+                            <th>MAS-IPSP</th>
+                            <th>MAS-IPSP %</th>
+                            <th>PDC</th>
+                            <th>UD</th>
+                            <th>VALIDOS</th>
+                            <th>BLANCOS</th>
+                            <th>NULOS</th>
+                            <th>EMITIDOS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <style type="text/css" media="screen">
@@ -239,72 +264,5 @@ function showModal(c){
         float: left;
         margin-right: 8px;
         opacity: 0.7;
-    }
-
-    /******************/
-
-    .modal.left .modal-dialog {
-        position: fixed;
-        margin: auto;
-        width: 320px;
-        height: 100%;
-        -webkit-transform: translate3d(0%, 0, 0);
-        -ms-transform: translate3d(0%, 0, 0);
-        -o-transform: translate3d(0%, 0, 0);
-        transform: translate3d(0%, 0, 0);
-    }
-
-    .modal.left .modal-content {
-        height: 100%;
-        overflow-y: auto;
-    }
-
-    .modal.left .modal-body {
-        padding: 15px 15px 80px;
-    }
-
-    .modal.left.fade .modal-dialog {
-        left: -320px;
-        -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-        -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-        -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-        transition: opacity 0.3s linear, left 0.3s ease-out;
-    }
-
-    .modal.left.fade.show .modal-dialog {
-        left: 0;
-    }
-
-    /* ----- MODAL STYLE ----- */
-    .modal-content {
-        border-radius: 0;
-        border: none;
-    }
-
-    .modal-header {
-        border-bottom-color: #eeeeee;
-        background-color: #fafafa;
-    }
-
-    /* ----- v CAN BE DELETED v ----- */
-    body {
-        background-color: #78909c;
-    }
-
-    .demo {
-        padding-top: 60px;
-        padding-bottom: 110px;
-    }
-
-    .btn-demo {
-        margin: 15px;
-        padding: 10px 15px;
-        border-radius: 0;
-        font-size: 16px;
-        background-color: #ffffff;
-    }
-
-    .btn-demo:focus {
-        outline: 0;
     }
 </style>
