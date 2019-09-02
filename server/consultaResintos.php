@@ -2,7 +2,7 @@
     include '../conexion.php';
 
     // Realizar una consulta SQL
-    $sql = "SELECT * FROM resintoCoor";
+    $sql = "SELECT * FROM recinto";
 
     $query = $db->Execute($sql);
 
@@ -30,15 +30,17 @@
             'geometry' => array(
                 'type' => 'Point',
                 'coordinates' => array(
-                    $row['longitud'],
-                    $row['latitud']
+                    $row['lng'],
+                    $row['lat']
                 )
             ),
             'properties' => array(
-                "@id" => $row['idRes'],
+                '@id'            => $row['idRecinto'],
+                'id'             => $row['idRecinto'],
                 'circuncripcion' => $row['circuns'],
-                'zona' => $row['zona'],
-                'resinto' => $row['resinto']
+                'zona'           => $row['zona'],
+                'recinto'        => $row['name'],
+                'porcentaje'     => $row['porcentaje']
                 //'fecha' => $fecha
             )
         );
