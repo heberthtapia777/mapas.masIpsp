@@ -9,23 +9,29 @@
         <title>Leaflet sample</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""/>
+        <link rel="stylesheet" type="text/css" href="css/font-awesome/css/all.css">
         <link rel="stylesheet" type="text/css" href="src/leaflet-panel-layers.css">
         <link rel="stylesheet" type="text/css" href="css/myStyle.css">
         <link rel="stylesheet" type="text/css" href="css/leaflet-search.css">
         <link rel="stylesheet" type="text/css" href="assets/sweetalert2/dist/sweetalert2.min.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+
 
         <!-- Make sure you put this AFTER Leaflet's CSS -->
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
     crossorigin=""></script>
-
         <script src="src/leaflet-panel-layers.js" type="text/javascript" ></script>
+        <script src="js/leaflet_.js" type="text/javascript"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"
      type="text/javascript" ></script>
         <script src="js/leaflet-search.js" type="text/javascript"></script>
         <script src="assets/sweetalert2/dist/sweetalert2.all.min.js" type="text/javascript"></script>
-        <script src="js/leaflet_.js" type="text/javascript"></script>
-        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js " type="text/javascript"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
         <style>
             .search-input {
@@ -46,7 +52,12 @@
             }
             #myModal.modal{
                 left: auto;
-            }flex-wrap:
+            }
+            canvas {
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+            }
         </style>
     </head>
 <body>
@@ -134,77 +145,95 @@
      var img;
      // capa flotante donde se muestra la info al darle click sobre un maker
 
-function capa(data){
-
-          if (info != undefined) { // se valida si existe informacion en la capa, si es borra la capa
-              info.remove(mapa); // esta linea quita la capa flotante
-          }
-
-          info = L.control({position: 'bottomleft'});
-
-          info.onAdd = function (mapa) {
-              this._div = L.DomUtil.create('div', 'info');
-              this.update(data);
-              return this._div;
-          };
-
-          info.update = function (data) {
-
+var randomScalingFactor = function() {
+            return Math.round(Math.random() * 100);
         };
-          info.addTo(mapa);
-      }
 
-      // variable que guarda los detalles del marker al que se le dio click
-      var eventBackup;
-      // variable auxiliar que guarda el tag img con su src
-      var x;
-      // funcion que se ejecuta cuando se da click sobre un maker del mapa
-/*function onClick(e) {
-    var i = this.options;
-        console.log(i);
-        c='abre modal.....'+e;
-        showModal(c);
-      }*/
+window.chartColors = {
+    red: 'rgb(255, 99, 132)',
+    orange: 'rgb(255, 159, 64)',
+    yellow: 'rgb(255, 205, 86)',
+    green: 'rgb(75, 192, 192)',
+    blue: 'rgb(54, 162, 235)',
+    purple: 'rgb(153, 102, 255)',
+    grey: 'rgb(201, 203, 207)'
+};
 
-function showModal(c){
-        //console.log(c);
-        Swal.fire({
-            position: 'top-end',
-            title: '<strong>HTML <u>example</u></strong>',
-            type: 'info',
-            html: c,
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-                '<i class="fa fa-thumbs-up"></i> Great!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-                '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
-        })
-      };
+var chartColors = window.chartColors;
+        var color = Chart.helpers.color;
+        var config = {
+            data: {
+                datasets: [{
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                    ],
+                    backgroundColor: [
+                        color(chartColors.red).alpha(0.5).rgbString(),
+                        color(chartColors.orange).alpha(0.5).rgbString(),
+                        color(chartColors.yellow).alpha(0.5).rgbString(),
+                        color(chartColors.green).alpha(0.5).rgbString(),
+                        color(chartColors.blue).alpha(0.5).rgbString(),
+                    ],
+                    label: 'My dataset' // for legend
+                }],
+                labels: [
+                    'Red',
+                    'Orange',
+                    'Yellow',
+                    'Green',
+                    'Blue'
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: true,
+                    text: 'GRAFICO'
+                },
+                scale: {
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    reverse: false
+                },
+                animation: {
+                    animateRotate: false,
+                    animateScale: true
+                }
+            }
+        };
 
 </script>
 
 <!-- Modal -->
 <div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <table id="datos">
-                    <caption>table title and/or explanatory text</caption>
+                <p><strong>CIRCUNSCRIPCION: </strong><span id="cir"></span></p>
+                <p><strong>ZONA: </strong><span id="zon"></span></p>
+                <p><strong>RECINTO: </strong><span id="rec"></span></p>
+                <p><strong>PORCENTAJE: </strong><span id="por"></span></p>
+
+
+                <table id="datosElec" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" >
                     <thead>
                         <tr>
-                            <th># MESA</th>
-                            <th>PVB-IEP</th>
+                            <th id="m">MESA</th>
+                            <th class="c">PVB-IEP</th>
                             <th>MSM</th>
-                            <th>MAS-IPSP</th>
-                            <th>MAS-IPSP %</th>
+                            <th class="d">MAS-IPSP</th>
                             <th>PDC</th>
                             <th>UD</th>
                             <th>VALIDOS</th>
@@ -213,16 +242,15 @@ function showModal(c){
                             <th>EMITIDOS</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>data</td>
-                        </tr>
-                    </tbody>
                 </table>
+
+                <div id="canvas-holder" style="width:100%" align="center">
+                    <canvas id="chart-area"></canvas>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -265,4 +293,6 @@ function showModal(c){
         margin-right: 8px;
         opacity: 0.7;
     }
+
 </style>
+

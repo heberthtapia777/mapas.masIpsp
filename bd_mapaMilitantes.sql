@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : GoDaddy
+ Source Server         : Localhost
  Source Server Type    : MySQL
- Source Server Version : 50643
- Source Host           : 10millas.com:3306
+ Source Server Version : 50637
+ Source Host           : localhost:3306
  Source Schema         : bd_mapaMilitantes
 
  Target Server Type    : MySQL
- Target Server Version : 50643
+ Target Server Version : 50637
  File Encoding         : 65001
 
- Date: 02/09/2019 01:01:56
+ Date: 03/09/2019 19:21:26
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,12 @@ CREATE TABLE `elecciones`  (
   `idElecciones` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`idElecciones`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of elecciones
+-- ----------------------------
+INSERT INTO `elecciones` VALUES (1, 'ELECCIONES GENERALES 2014');
 
 -- ----------------------------
 -- Table structure for mesa
@@ -42,41 +47,33 @@ CREATE TABLE `mesa`  (
   `emitido` int(11) NOT NULL,
   `inscritosHab` int(11) NOT NULL,
   PRIMARY KEY (`idMesa`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of mesa
 -- ----------------------------
-INSERT INTO `mesa` VALUES (1, 1, '', 1, 209, 0, 0, 213, 235);
+INSERT INTO `mesa` VALUES (1, 1, '', 1, 209, 0, 4, 213, 235);
 INSERT INTO `mesa` VALUES (2, 1, '', 2, 210, 4, 0, 214, 231);
-INSERT INTO `mesa` VALUES (3, 1, '', 3, 208, 2, 0, 217, 234);
-INSERT INTO `mesa` VALUES (4, 1, '', 4, 217, 1, 0, 222, 237);
-INSERT INTO `mesa` VALUES (5, 1, '', 5, 215, 0, 0, 217, 233);
-INSERT INTO `mesa` VALUES (6, 1, '', 6, 205, 0, 0, 211, 232);
-INSERT INTO `mesa` VALUES (7, 1, '', 7, 200, 0, 0, 204, 234);
-INSERT INTO `mesa` VALUES (8, 1, '', 8, 203, 2, 0, 213, 234);
-INSERT INTO `mesa` VALUES (9, 1, '', 9, 211, 1, 0, 223, 238);
-INSERT INTO `mesa` VALUES (10, 1, '', 10, 208, 4, 0, 218, 233);
-INSERT INTO `mesa` VALUES (11, 1, '', 11, 203, 2, 0, 214, 234);
-INSERT INTO `mesa` VALUES (12, 1, '', 12, 208, 3, 0, 215, 234);
-INSERT INTO `mesa` VALUES (13, 1, '', 13, 212, 0, 0, 217, 235);
-INSERT INTO `mesa` VALUES (14, 1, '', 14, 210, 1, 0, 216, 235);
-INSERT INTO `mesa` VALUES (15, 1, '', 15, 197, 3, 0, 205, 225);
-INSERT INTO `mesa` VALUES (16, 1, '', 16, 208, 0, 0, 215, 230);
-INSERT INTO `mesa` VALUES (17, 1, '', 17, 208, 2, 0, 216, 236);
-INSERT INTO `mesa` VALUES (18, 1, '', 18, 206, 2, 0, 236, 236);
-INSERT INTO `mesa` VALUES (19, 1, '', 19, 198, 2, 0, 209, 231);
-INSERT INTO `mesa` VALUES (20, 1, '', 20, 194, 3, 0, 213, 230);
-INSERT INTO `mesa` VALUES (21, 1, '', 21, 204, 3, 0, 214, 236);
-INSERT INTO `mesa` VALUES (22, 1, '', 22, 130, 2, 0, 139, 147);
-INSERT INTO `mesa` VALUES (23, 2, '', 1, 215, 2, 0, 220, 233);
-INSERT INTO `mesa` VALUES (24, 2, '', 2, 221, 0, 0, 226, 232);
-INSERT INTO `mesa` VALUES (25, 2, '', 3, 209, 1, 0, 218, 231);
-INSERT INTO `mesa` VALUES (26, 2, '', 4, 217, 2, 0, 226, 235);
-INSERT INTO `mesa` VALUES (27, 2, '', 5, 216, 1, 0, 222, 236);
-INSERT INTO `mesa` VALUES (28, 2, '', 6, 213, 1, 0, 217, 232);
-INSERT INTO `mesa` VALUES (29, 2, '', 7, 221, 1, 0, 226, 235);
-INSERT INTO `mesa` VALUES (30, 2, '', 8, 133, 0, 0, 135, 145);
+INSERT INTO `mesa` VALUES (3, 1, '', 3, 208, 2, 7, 217, 234);
+INSERT INTO `mesa` VALUES (4, 1, '', 4, 217, 1, 4, 222, 237);
+INSERT INTO `mesa` VALUES (5, 1, '', 5, 215, 0, 2, 217, 233);
+INSERT INTO `mesa` VALUES (6, 1, '', 6, 205, 0, 6, 211, 232);
+INSERT INTO `mesa` VALUES (7, 1, '', 7, 200, 0, 4, 204, 234);
+INSERT INTO `mesa` VALUES (8, 1, '', 8, 203, 2, 8, 213, 234);
+INSERT INTO `mesa` VALUES (9, 1, '', 9, 211, 1, 11, 223, 238);
+INSERT INTO `mesa` VALUES (10, 1, '', 10, 208, 4, 6, 218, 233);
+INSERT INTO `mesa` VALUES (11, 1, '', 11, 203, 2, 9, 214, 234);
+INSERT INTO `mesa` VALUES (12, 1, '', 12, 208, 3, 4, 215, 234);
+INSERT INTO `mesa` VALUES (13, 1, '', 13, 212, 0, 5, 217, 235);
+INSERT INTO `mesa` VALUES (14, 1, '', 14, 210, 1, 5, 216, 235);
+INSERT INTO `mesa` VALUES (15, 1, '', 15, 197, 3, 5, 205, 225);
+INSERT INTO `mesa` VALUES (16, 1, '', 16, 208, 0, 7, 215, 230);
+INSERT INTO `mesa` VALUES (17, 1, '', 17, 208, 2, 6, 216, 236);
+INSERT INTO `mesa` VALUES (18, 1, '', 18, 206, 2, 28, 236, 236);
+INSERT INTO `mesa` VALUES (19, 1, '', 19, 198, 2, 9, 209, 231);
+INSERT INTO `mesa` VALUES (20, 1, '', 20, 194, 3, 16, 213, 230);
+INSERT INTO `mesa` VALUES (21, 1, '', 21, 204, 3, 7, 214, 236);
+INSERT INTO `mesa` VALUES (22, 1, '', 22, 130, 2, 7, 139, 147);
 
 -- ----------------------------
 -- Table structure for partido
@@ -84,6 +81,7 @@ INSERT INTO `mesa` VALUES (30, 2, '', 8, 133, 0, 0, 135, 145);
 DROP TABLE IF EXISTS `partido`;
 CREATE TABLE `partido`  (
   `idPartido` int(11) NOT NULL AUTO_INCREMENT,
+  `idElecciones` int(11) NOT NULL,
   `name` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `sigla` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`idPartido`) USING BTREE
@@ -92,11 +90,11 @@ CREATE TABLE `partido`  (
 -- ----------------------------
 -- Records of partido
 -- ----------------------------
-INSERT INTO `partido` VALUES (1, '', 'PVB-IEP');
-INSERT INTO `partido` VALUES (2, '', 'MSM');
-INSERT INTO `partido` VALUES (3, '', 'MAS-IPSP');
-INSERT INTO `partido` VALUES (4, '', 'PDC');
-INSERT INTO `partido` VALUES (5, '', 'UD');
+INSERT INTO `partido` VALUES (1, 1, '', 'PVB-IEP');
+INSERT INTO `partido` VALUES (2, 1, '', 'MSM');
+INSERT INTO `partido` VALUES (3, 1, '', 'MAS-IPSP');
+INSERT INTO `partido` VALUES (4, 1, '', 'PDC');
+INSERT INTO `partido` VALUES (5, 1, '', 'UD');
 
 -- ----------------------------
 -- Table structure for recinto
@@ -316,7 +314,432 @@ CREATE TABLE `recintoElec`  (
   `idRecinto` int(11) NOT NULL,
   `dateElec` date NOT NULL,
   PRIMARY KEY (`idRecintoElec`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 190 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of recintoElec
+-- ----------------------------
+INSERT INTO `recintoElec` VALUES (1, 1, 1, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (2, 1, 2, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (3, 1, 3, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (4, 1, 4, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (5, 1, 5, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (6, 1, 6, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (7, 1, 7, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (8, 1, 8, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (9, 1, 9, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (10, 1, 10, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (11, 1, 11, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (12, 1, 12, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (13, 1, 13, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (14, 1, 14, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (15, 1, 15, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (16, 1, 16, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (17, 1, 17, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (18, 1, 18, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (19, 1, 19, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (20, 1, 20, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (21, 1, 21, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (22, 1, 22, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (23, 1, 23, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (24, 1, 24, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (25, 1, 25, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (26, 1, 26, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (27, 1, 27, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (28, 1, 28, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (29, 1, 29, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (30, 1, 30, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (31, 1, 31, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (32, 1, 32, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (33, 1, 33, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (34, 1, 34, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (35, 1, 35, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (36, 1, 36, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (37, 1, 37, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (38, 1, 38, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (39, 1, 39, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (40, 1, 40, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (41, 1, 41, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (42, 1, 42, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (43, 1, 43, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (44, 1, 44, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (45, 1, 45, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (46, 1, 46, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (47, 1, 47, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (48, 1, 48, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (49, 1, 49, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (50, 1, 50, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (51, 1, 51, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (52, 1, 52, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (53, 1, 53, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (54, 1, 54, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (55, 1, 55, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (56, 1, 56, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (57, 1, 57, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (58, 1, 58, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (59, 1, 59, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (60, 1, 60, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (61, 1, 61, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (62, 1, 62, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (63, 1, 63, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (64, 1, 64, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (65, 1, 65, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (66, 1, 66, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (67, 1, 67, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (68, 1, 68, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (69, 1, 69, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (70, 1, 70, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (71, 1, 71, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (72, 1, 72, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (73, 1, 73, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (74, 1, 74, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (75, 1, 75, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (76, 1, 76, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (77, 1, 77, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (78, 1, 78, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (79, 1, 79, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (80, 1, 80, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (81, 1, 81, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (82, 1, 82, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (83, 1, 83, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (84, 1, 84, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (85, 1, 85, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (86, 1, 86, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (87, 1, 87, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (88, 1, 88, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (89, 1, 89, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (90, 1, 90, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (91, 1, 91, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (92, 1, 92, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (93, 1, 93, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (94, 1, 94, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (95, 1, 95, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (96, 1, 96, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (97, 1, 97, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (98, 1, 98, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (99, 1, 99, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (100, 1, 100, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (101, 1, 101, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (102, 1, 102, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (103, 1, 103, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (104, 1, 104, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (105, 1, 105, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (106, 1, 106, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (107, 1, 107, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (108, 1, 108, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (109, 1, 109, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (110, 1, 110, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (111, 1, 111, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (112, 1, 112, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (113, 1, 113, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (114, 1, 114, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (115, 1, 115, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (116, 1, 116, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (117, 1, 117, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (118, 1, 118, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (119, 1, 119, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (120, 1, 120, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (121, 1, 121, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (122, 1, 122, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (123, 1, 123, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (124, 1, 124, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (125, 1, 125, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (126, 1, 126, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (127, 1, 127, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (128, 1, 128, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (129, 1, 129, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (130, 1, 130, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (131, 1, 131, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (132, 1, 132, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (133, 1, 133, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (134, 1, 134, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (135, 1, 135, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (136, 1, 136, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (137, 1, 137, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (138, 1, 138, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (139, 1, 139, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (140, 1, 140, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (141, 1, 141, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (142, 1, 142, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (143, 1, 143, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (144, 1, 144, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (145, 1, 145, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (146, 1, 146, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (147, 1, 147, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (148, 1, 148, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (149, 1, 149, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (150, 1, 150, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (151, 1, 151, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (152, 1, 152, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (153, 1, 153, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (154, 1, 154, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (155, 1, 155, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (156, 1, 156, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (157, 1, 157, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (158, 1, 158, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (159, 1, 159, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (160, 1, 160, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (161, 1, 161, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (162, 1, 162, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (163, 1, 163, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (164, 1, 164, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (165, 1, 165, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (166, 1, 166, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (167, 1, 167, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (168, 1, 168, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (169, 1, 169, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (170, 1, 170, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (171, 1, 171, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (172, 1, 172, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (173, 1, 173, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (174, 1, 174, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (175, 1, 175, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (176, 1, 176, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (177, 1, 177, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (178, 1, 178, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (179, 1, 179, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (180, 1, 180, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (181, 1, 181, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (182, 1, 182, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (183, 1, 183, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (184, 1, 184, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (185, 1, 185, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (186, 1, 186, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (187, 1, 187, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (188, 1, 188, '0000-00-00');
+INSERT INTO `recintoElec` VALUES (189, 1, 189, '0000-00-00');
+
+-- ----------------------------
+-- Table structure for resintoCoor
+-- ----------------------------
+DROP TABLE IF EXISTS `resintoCoor`;
+CREATE TABLE `resintoCoor`  (
+  `idRes` int(100) NOT NULL AUTO_INCREMENT,
+  `circuns` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `zona` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `resinto` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `latitud` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `longitud` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`idRes`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 215 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of resintoCoor
+-- ----------------------------
+INSERT INTO `resintoCoor` VALUES (1, '8', 'GRAN_PODER', 'Unidad Educativa Arabe De Egipto', '-16.49708735712652', '-68.14084595069289');
+INSERT INTO `resintoCoor` VALUES (2, '8', 'SAN_PEDRO_BAJO', 'Unidad Educativa Republica de Cuba', '-16.50288190320091', '-68.13566788332537');
+INSERT INTO `resintoCoor` VALUES (3, '8', 'SAN_PEDRO_BAJO', '(CÃ¡rcel) PanÃ³ptico', '-16.502803164455038', '-68.13494806643577');
+INSERT INTO `resintoCoor` VALUES (4, '8', 'TEMBLADERANI20', 'Unidad Educativa Puerto Rico', '-16.5125663837909', '-68.13939774641767');
+INSERT INTO `resintoCoor` VALUES (5, '8', 'CATORCE_DE_SEPTIEMBRE', 'Esc. Eduardo Avaroa', '-16.49654426587519', '-68.14449924509974');
+INSERT INTO `resintoCoor` VALUES (6, '8', 'ALTO_CHIJINI_24', 'Esc. Sagrado Corazon De Jesus', '-16.507283165278185', '-68.15341080073269');
+INSERT INTO `resintoCoor` VALUES (7, '8', 'KANTUTANI_SAN_JORGE', 'Col. Amor de Dios', '-16.515928323870995', '-68.11917711747812');
+INSERT INTO `resintoCoor` VALUES (8, '8', 'BELLO_HORIZONTE', 'Colegio Saint Peters', '-16.504380826439967', '-68.13631104771048');
+INSERT INTO `resintoCoor` VALUES (9, '8', 'VILLA_NUEVO_POTOSI', 'Col. Daniel Sanchez Bustamante', '-16.503691047940098', '-68.14704541582616');
+INSERT INTO `resintoCoor` VALUES (10, '8', 'PASANKERI', 'Col. Luis Espinal Camps', '-16.523140101866872', '-68.14562466228381');
+INSERT INTO `resintoCoor` VALUES (11, '8', 'OBISPO_INDABURO', 'Esc. Ladislao Cabrera', '-16.50074505607795', '-68.14961551688613');
+INSERT INTO `resintoCoor` VALUES (12, '8', 'VILLA_NUEVO_POTOSI', 'Esc. Remberto Tapia', '-16.504121406363073', '-68.14639317803086');
+INSERT INTO `resintoCoor` VALUES (13, '8', 'LLOJETA_ALTO', 'Esc. Jose Santos', '-16.532554522659037', '-68.14199808519335');
+INSERT INTO `resintoCoor` VALUES (14, '8', 'TEMBLADERANI20', 'Unidad Educativa Carlos Medinacelli', '-16.51243392688351', '-68.14065941143782');
+INSERT INTO `resintoCoor` VALUES (15, '8', 'KANTUTANI_SAN_JORGE', 'Esc. Republica Del Peru', '-16.506692607207277', '-68.12869374174626');
+INSERT INTO `resintoCoor` VALUES (16, '8', 'TEMBLADERANI20', 'Unid. Educ. Raul Salmon De La Barra', '-16.522657312077488', '-68.13962145941333');
+INSERT INTO `resintoCoor` VALUES (17, '8', 'CATORCE_DE_SEPTIEMBRE', 'Unidad Educativa Privada La Paz', '-16.498926522416557', '-68.14599403180183');
+INSERT INTO `resintoCoor` VALUES (18, '8', 'TEMBLADERANI20', 'Colegio Ignacio Calderon', '-16.510755354691728', '-68.14202289562674');
+INSERT INTO `resintoCoor` VALUES (19, '8', 'TEMBLADERANI20', 'U. E. Pantaleon Dalence', '-16.51057196653176', '-68.14199075102808');
+INSERT INTO `resintoCoor` VALUES (20, '8', 'GRAN_PODER', 'Colegio Villarroel (Gran Poder)', '-16.496122027949927', '-68.14119277289139');
+INSERT INTO `resintoCoor` VALUES (21, '8', 'BELEN', 'Col. Maria Auxiliadora', '-16.502919936474946', '-68.13757185358556');
+INSERT INTO `resintoCoor` VALUES (22, '8', 'OBISPO_INDABURO', 'Esc. Gral. Jose Manuel Pando', '-16.499838935759275', '-68.14988061552869');
+INSERT INTO `resintoCoor` VALUES (23, '8', 'BELEN', 'Col. San Martin', '-16.4999209305906', '-68.14119396731259');
+INSERT INTO `resintoCoor` VALUES (24, '8', 'SOPOCACHI_ALTO_21', 'Complejo Deportivo San Luis', '-16.51169483455896', '-68.13593463739382');
+INSERT INTO `resintoCoor` VALUES (25, '8', 'TACAGUA', 'Unid. Educ. Jaime Escalante', '-16.511498348193065', '-68.14831607043745');
+INSERT INTO `resintoCoor` VALUES (26, '8', 'SOPOCACHI_BAJO', 'Escuela Agustin Aspiazu', '-16.5076571603475', '-68.12958165770397');
+INSERT INTO `resintoCoor` VALUES (27, '8', 'SOPOCACHI_BAJO_21', 'Instituto Americano (Sopocachi Bajo 21)', '-16.506209394592325', '-68.13238854752855');
+INSERT INTO `resintoCoor` VALUES (28, '8', 'LLOJETA_BAJO', 'Esc. San Jose', '-16.527041409712243', '-68.12814307166263');
+INSERT INTO `resintoCoor` VALUES (29, '8', 'ROSARIO', 'Col. San Francisco', '-16.496809683580647', '-68.1379795074463');
+INSERT INTO `resintoCoor` VALUES (30, '8', 'VILLA_NUEVO_POTOSI', 'Col. Canada', '-16.506633699975467', '-68.14344048500062');
+INSERT INTO `resintoCoor` VALUES (31, '8', 'SOPOCACHI_ALTO', 'Colegio San Luis', '-16.51371079724325', '-68.13488960266115');
+INSERT INTO `resintoCoor` VALUES (32, '8', 'SAN_PEDRO_ALTO', 'Instituto Mendez Arcos', '-16.504380906805483', '-68.13991069793703');
+INSERT INTO `resintoCoor` VALUES (33, '8', 'TACAGUA', 'Escuela Republica de Japon (Tacagua)', '-16.511530091402715', '-68.14353704452516');
+INSERT INTO `resintoCoor` VALUES (34, '8', 'TEMBLADERANI20', 'Unid. Educ. Hugo Banzer Suarez', '-16.512054697413834', '-68.14330101013185');
+INSERT INTO `resintoCoor` VALUES (35, '8', 'SOPOCACHI_BAJO', 'Colegio Amoretti', '-16.517156673761075', '-68.12905311584474');
+INSERT INTO `resintoCoor` VALUES (36, '8', 'SOPOCACHI_BAJO', 'Col. Gregorio Reynolds', '-16.516148632660876', '-68.13272237777711');
+INSERT INTO `resintoCoor` VALUES (37, '8', 'SAN_PEDRO_BAJO', 'Colegio Bolivar', '-16.50507012028793', '-68.13282966613771');
+INSERT INTO `resintoCoor` VALUES (38, '8', 'SAN_PEDRO_BAJO', 'Colegio Canadiense', '-16.503619683089436', '-68.13388109207155');
+INSERT INTO `resintoCoor` VALUES (39, '8', 'LADRILLERAS', 'Esc. San Miguel', '-16.546100091283204', '-68.14448937540875');
+INSERT INTO `resintoCoor` VALUES (40, '8', 'BELLO_HORIZONTE', 'Liceo La Paz', '-16.501273026575355', '-68.13185853883624');
+INSERT INTO `resintoCoor` VALUES (41, '8', 'TACAGUA', 'Esc. Alto Tembladerani', '-16.514658740856195', '-68.14683716744186');
+INSERT INTO `resintoCoor` VALUES (42, '8', 'SAN_PEDRO_ALTO', 'Esc. Alcides Arguedas', '-16.501249639831414', '-68.1409960705787');
+INSERT INTO `resintoCoor` VALUES (43, '8', 'SOPOCACHI_BAJO', 'Esc. Ecuador', '-16.508751938102467', '-68.12669247854502');
+INSERT INTO `resintoCoor` VALUES (44, '8', 'SOPOCACHI_BAJO', 'Kinder Nazario Pardo', '-16.515963582133928', '-68.12485028291123');
+INSERT INTO `resintoCoor` VALUES (45, '8', 'LLOJETA_CENTRAL', 'Unid. Educ. Jorge Vargas', '-16.53280456344256', '-68.13078967854382');
+INSERT INTO `resintoCoor` VALUES (46, '8', 'ROSARIO', 'Esc. Mcal Santa Cruz', '-16.495657514937115', '-68.13795804977418');
+INSERT INTO `resintoCoor` VALUES (47, '8', 'SOPOCACHI_ALTO', 'Liceo Bolivia', '-16.511083154567018', '-68.13100867671893');
+INSERT INTO `resintoCoor` VALUES (48, '8', 'KANTUTANI_SAN_JORGE', 'Facultad de Tecnologia (U.M.S.A)', '-16.507479997476576', '-68.1270935945213');
+INSERT INTO `resintoCoor` VALUES (49, '8', 'SAN_PEDRO_ALTO', 'C. E. Adventista Bello Horizonte', '-16.50954902386201', '-68.14237860264257');
+INSERT INTO `resintoCoor` VALUES (50, '8', 'ROSARIO', 'Colegio Villarroel (Rosario)', '-16.496153924375456', '-68.14119646092878');
+INSERT INTO `resintoCoor` VALUES (51, '8', 'BELLO_HORIZONTE', 'Instituto Americano (Bello Horizonte)', '-16.506303993938875', '-68.13227046746762');
+INSERT INTO `resintoCoor` VALUES (52, '8', 'TEMBLADERANI19', 'Escuela Republica de Japon (Tembladerani 19)', '-16.511344001784483', '-68.14355150330812');
+INSERT INTO `resintoCoor` VALUES (53, '8', 'GRAN_PODER', 'COL. DOMINGO F. SARMIENTO', '-16.513438210358807', '-68.14794659614564');
+INSERT INTO `resintoCoor` VALUES (54, '8', 'TEMBLADERANI20', 'COL. PANAMERICAN SCHOOL', '', '');
+INSERT INTO `resintoCoor` VALUES (55, '8', 'TACAGUA', 'COL. PANTALEON DALENCE', '-16.510439729255857', '-68.1421744823456');
+INSERT INTO `resintoCoor` VALUES (56, '8', 'GRAN_PODER', 'EDIF. MUNICIPAL SUB ALCALDIA', '-16.496470206032594', '-68.14432024955751');
+INSERT INTO `resintoCoor` VALUES (57, '8', 'VILLA_NUEVO_POTOSI', 'ESC. JAPON', '', '');
+INSERT INTO `resintoCoor` VALUES (58, '8', 'TEMBLADERANI20', 'PARQUEO STADIUM BOLIVAR', '-16.513227340995744', '-68.1416541337967');
+INSERT INTO `resintoCoor` VALUES (59, '8', 'ALTO_CHIJINI_24', 'PLAZA NIÃ‘O JESUS', '', '');
+INSERT INTO `resintoCoor` VALUES (60, '8', 'CATORCE_DE_SEPTIEMBRE', 'POLIFUNCIONAL JUVENIL LOS ANDES', '', '');
+INSERT INTO `resintoCoor` VALUES (61, '8', 'SAN_PEDRO_ALTO', 'UNID. EDUC. MARIO MERCADO VACA GUZMAN', '-16.508675592568142', '-68.14289867877962');
+INSERT INTO `resintoCoor` VALUES (62, '8', 'SAN_PEDRO_BAJO', 'PANOPTICO', '-16.502879030111227', '-68.1349539756775');
+INSERT INTO `resintoCoor` VALUES (63, '7', 'COTA_COTA', 'Esc. Walter Straub', '-16.54228478135609', '-68.0638515483588');
+INSERT INTO `resintoCoor` VALUES (64, '7', 'IRPAVI', 'Escuela Rosemari de Barrientos', '-16.525187103506575', '-68.08741831686348');
+INSERT INTO `resintoCoor` VALUES (65, '7', 'SAN_MIGUEL', 'Col. Loretto', '-16.545424663367257', '-68.07848817436025');
+INSERT INTO `resintoCoor` VALUES (66, '7', 'LOS_PINOS', 'Unidad Educativa Los Pinos', '-16.54190454587253', '-68.07636028155686');
+INSERT INTO `resintoCoor` VALUES (67, '7', 'CALACOTO_KOANI', 'Colegio Rene Barrientos', '-16.538750384398604', '-68.07791416067631');
+INSERT INTO `resintoCoor` VALUES (68, '7', 'COTA_COTA', 'U.E. San AndrÃ©s', '-16.537549973569394', '-68.07054935954513');
+INSERT INTO `resintoCoor` VALUES (69, '7', 'OBRAJES', 'Instituto Americano Obrajes', '-16.526712431569457', '-68.1056825676933');
+INSERT INTO `resintoCoor` VALUES (70, '7', 'SAN_ISIDRO', 'Polifuncional San Isidro (Iglesia San Isidro)', '-16.51310097195509', '-68.10713251121344');
+INSERT INTO `resintoCoor` VALUES (71, '7', 'BELLA_VISTA', 'Plaza Daniel Rodriguez', '-16.53117195017887', '-68.0991601268761');
+INSERT INTO `resintoCoor` VALUES (72, '7', 'BOLONIA', 'U. E. Ff. Aa. De La NaciÃ³n', '-16.521886798609653', '-68.08980785077439');
+INSERT INTO `resintoCoor` VALUES (73, '7', 'PAMPAHASI_ALTO', 'Unidad Educativa 24 de Junio', '-16.494946789183153', '-68.1038977042772');
+INSERT INTO `resintoCoor` VALUES (74, '7', 'ACHUMANI_BAJO_Y_MESETA', 'Colegio Franco Boliviano', '-16.533165090063', '-68.07721814839171');
+INSERT INTO `resintoCoor` VALUES (75, '7', 'BELLA_VISTA', 'Esc. Francisco De Miranda', '-16.5311858514858', '-68.09378592297436');
+INSERT INTO `resintoCoor` VALUES (76, '7', 'KOANI', 'Instituto Domingo Savio', '-16.53961251091907', '-68.08479834347965');
+INSERT INTO `resintoCoor` VALUES (77, '7', 'CHASQUIPAMPA', 'Escuela Chasquipampa', '-16.53786738270144', '-68.04552020039411');
+INSERT INTO `resintoCoor` VALUES (78, '7', 'PAMPAHASI_BAJO', 'Colegio Don Bosco', '-16.5001104166753', '-68.1018460658379');
+INSERT INTO `resintoCoor` VALUES (79, '7', 'CALACOTO_LA_FLORIDA', 'Escuela Santa Rosa La Florida', '-16.546162240576166', '-68.092525661923');
+INSERT INTO `resintoCoor` VALUES (80, '7', 'PAMPAHASI_BAJO', 'Colegio Jerusalem', '-16.50195521906283', '-68.10322294011713');
+INSERT INTO `resintoCoor` VALUES (81, '7', 'KUPINI', 'Colegio Sergio Villegas', '-16.5119155098058', '-68.09905998408794');
+INSERT INTO `resintoCoor` VALUES (82, '7', 'CALLAPA', 'Escuela Callapa (Plaza De Callapa)', '-16.499623571075947', '-68.09039326384664');
+INSERT INTO `resintoCoor` VALUES (83, '7', 'ALTO_OBRAJES', 'Colegio 6 de Junio', '-16.522858528208285', '-68.10534976422788');
+INSERT INTO `resintoCoor` VALUES (84, '7', 'SEGUENCOMA_ALTO', 'Escuela Juan Pablo II', '-16.53409082098689', '-68.10307590058075');
+INSERT INTO `resintoCoor` VALUES (85, '7', 'ACHUMANI_ALTO', 'Escuela Alto Achumani', '-16.51433297617028', '-68.05837741121651');
+INSERT INTO `resintoCoor` VALUES (86, '7', 'OVEJUYO', 'Esc. Santa Rosa De Lima', '-16.536966699531884', '-68.03817987442018');
+INSERT INTO `resintoCoor` VALUES (87, '7', 'PAMPAHASI_ALTO', 'Colegio Topater', '-16.492427291266377', '-68.10403347015382');
+INSERT INTO `resintoCoor` VALUES (88, '7', 'BELLA_VISTA', 'Cancha Deportiva Bella Vista', '-16.528491630933022', '-68.09731721878053');
+INSERT INTO `resintoCoor` VALUES (89, '7', 'ROSALES', 'U.E. El Pedregal (Urb. Pedregal)', '-16.54418667067199', '-68.05262088775636');
+INSERT INTO `resintoCoor` VALUES (90, '7', 'OBRAJES', 'Col. Herschell', '-16.52757621897751', '-68.10584664344789');
+INSERT INTO `resintoCoor` VALUES (91, '7', 'APAÃ‘A', 'Unid. Educ. Joaquin Hernann', '-16.548466089083078', '-68.02585269324483');
+INSERT INTO `resintoCoor` VALUES (92, '7', 'MALLASILLA', 'Centro de Capacitacion Inti Paxsi', '-16.56524052375868', '-68.09959854232147');
+INSERT INTO `resintoCoor` VALUES (93, '7', 'CIUDAD_DEL_NIÃ‘O', 'Escuela Ciudad Del NiÃ±o', '-16.493889787500212', '-68.09780018404126');
+INSERT INTO `resintoCoor` VALUES (94, '7', 'ALTO_IRPAVI', 'Escuela Victor Paz Estensoro', '-16.516573960911675', '-68.0840920424089');
+INSERT INTO `resintoCoor` VALUES (95, '7', 'ROSALES', 'U.E. Betesta', '-16.54393983851294', '-68.04996013641359');
+INSERT INTO `resintoCoor` VALUES (96, '7', 'SEGUENCOMA_BAJO', 'Colegio San Ignacio', '-16.536719858135374', '-68.09708118438722');
+INSERT INTO `resintoCoor` VALUES (97, '7', 'CHICANI', 'Esc. Mscal. Antonio Jose De Sucre', '-16.486872003447495', '-68.07897090911867');
+INSERT INTO `resintoCoor` VALUES (98, '7', 'JUPAPINA', 'Unidad Educativa Jupapina', '-16.589495584982515', '-68.07433605194093');
+INSERT INTO `resintoCoor` VALUES (99, '7', 'MALLASA', 'Unidad Educativa Mallasa', '-16.57044266110547', '-68.08769812574612');
+INSERT INTO `resintoCoor` VALUES (100, '7', 'SEGUENCOMA_ALTO', 'Unidad Educativa Rosario (Urb. El Rosario)', '-16.528951203544025', '-68.11522823525594');
+INSERT INTO `resintoCoor` VALUES (101, '7', 'PAMPAHASI_BAJO', 'Colegio Delia Gambarte', '-16.505981942092742', '-68.10195588972421');
+INSERT INTO `resintoCoor` VALUES (102, '7', 'CHINCHAYA', 'Escuela 13 de Junio Chinchaya', '-16.484501554115553', '-68.08385143987836');
+INSERT INTO `resintoCoor` VALUES (103, '7', 'OBRAJES', '(CÃ¡rcel) C.O.F. Obrajes', '-16.527041028020783', '-68.1097329966724');
+INSERT INTO `resintoCoor` VALUES (104, '7', 'ARANJUEZ', 'Seminario Nazareno', '-16.559720993789067', '-68.09367917943747');
+INSERT INTO `resintoCoor` VALUES (105, '7', 'ALTO_OBRAJES', 'U.E. Gran BretaÃ±a', '-16.519787729472444', '-68.1090276595205');
+INSERT INTO `resintoCoor` VALUES (106, '7', 'BELLA_VISTA', 'COL. LAS AMERICAS', '', '');
+INSERT INTO `resintoCoor` VALUES (107, '7', 'COTA_COTA', 'COL. LIBERTADORES DE AMERICA', '-16.541636056463744', '-68.06664347648622');
+INSERT INTO `resintoCoor` VALUES (108, '7', 'ALTO_IRPAVI', 'ESCUELA ALTO IRPAVI', '', '');
+INSERT INTO `resintoCoor` VALUES (109, '7', 'CHICANI', 'ESCUELA CHICANI', '', '');
+INSERT INTO `resintoCoor` VALUES (110, '7', 'MALLASILLA', 'SEDE JUNTA DE VECINOS MALLASILLA', '', '');
+INSERT INTO `resintoCoor` VALUES (111, '7', 'MALLASA', 'UNID. EDUC. JOAQUIN HERNAN(MALLASA)', '-16.546634405817493', '-68.02718281745912');
+INSERT INTO `resintoCoor` VALUES (112, '7', 'ALTO_OBRAJES', 'UNIDAD EDUCATIVA JUAN DE LEON', '', '');
+INSERT INTO `resintoCoor` VALUES (113, '7', 'MALLASILLA', 'CAPILLA DE MALLASILLA', '-16.567078979558158', '-68.09830427169801');
+INSERT INTO `resintoCoor` VALUES (114, '6', 'MIRAFLORES_ALTO', 'Tecnico Ayacucho (Miraflores Alto)', '-16.485200101456012', '-68.12141045462342');
+INSERT INTO `resintoCoor` VALUES (115, '6', 'VILLA_COPACABANA', 'Col. Cristo Rey', '-16.490138908940295', '-68.11715041520074');
+INSERT INTO `resintoCoor` VALUES (116, '6', 'VILLA_FATIMA', 'Colegio Ave Maria (Villa Fatima)', '-16.474289193520892', '-68.11796710593626');
+INSERT INTO `resintoCoor` VALUES (117, '6', 'MIRAFLORES', 'E.N.S.A.F.', '-16.504385326909105', '-68.11914826277643');
+INSERT INTO `resintoCoor` VALUES (118, '6', 'SANTA_ROSA_GRANDE', 'Colegio  Adolfo  Costa Du Rels', '-16.48285111173115', '-68.12956116395073');
+INSERT INTO `resintoCoor` VALUES (119, '6', 'VALLE_HERMOSO', 'Unidad Educativa Valle Hermoso', '-16.488249347122217', '-68.10804043896498');
+INSERT INTO `resintoCoor` VALUES (120, '6', 'VILLA_ARMONIA', 'Escuela Pedro Poveda (Villa Armonia)', '-16.510238460010523', '-68.1126197660342');
+INSERT INTO `resintoCoor` VALUES (121, '6', 'VILLA_ARMONIA', 'U.E. Waldo Ballivian', '-16.50858699152866', '-68.11186769977213');
+INSERT INTO `resintoCoor` VALUES (122, '6', 'VILLA_COPACABANA', 'Col. Copacabana', '-16.491171839902222', '-68.11597986146808');
+INSERT INTO `resintoCoor` VALUES (123, '6', 'BARRIO_MINASA', 'Esc. La Merced', '-16.46611873658173', '-68.11908124946059');
+INSERT INTO `resintoCoor` VALUES (124, '6', 'VILLA_EL_CARMEN', 'Colegio Irene Nava', '-16.467301424777425', '-68.11212787404658');
+INSERT INTO `resintoCoor` VALUES (125, '6', 'MIRAFLORES', 'Col. Cervantes', '-16.492358413746377', '-68.12261183280499');
+INSERT INTO `resintoCoor` VALUES (126, '6', 'MIRAFLORES', 'Col. Felipe 2do. Guzman', '-16.50599242970615', '-68.12116691842677');
+INSERT INTO `resintoCoor` VALUES (127, '6', 'SAN_ANTONIO_BAJO', 'Col. Sergio Almaraz', '-16.499236038611603', '-68.11178019270302');
+INSERT INTO `resintoCoor` VALUES (128, '6', 'SAN_JUAN_DE_LAZARETO', 'Parque Mirador Killi Killi', '-16.49447889782419', '-68.12744689173996');
+INSERT INTO `resintoCoor` VALUES (129, '6', 'MIRAFLORES', 'Col. Experimental Hugo Davila', '-16.49939442311107', '-68.11942922417076');
+INSERT INTO `resintoCoor` VALUES (130, '6', 'VILLA_COPACABANA', 'Unidad Educativa Cristiana Vida Nueva', '-16.489127351381182', '-68.1179700815119');
+INSERT INTO `resintoCoor` VALUES (131, '6', 'MIRAFLORES', 'Esc. Panama', '-16.494872407251204', '-68.12443399569021');
+INSERT INTO `resintoCoor` VALUES (132, '6', 'MIRAFLORES', 'Colegio Dora Schmidt', '-16.502890643018905', '-68.12254940858111');
+INSERT INTO `resintoCoor` VALUES (133, '6', 'LAS_DELICIAS', 'Colegio Nuestra SeÃ±ora de Fatima', '-16.47537586106461', '-68.1210715114139');
+INSERT INTO `resintoCoor` VALUES (134, '6', 'SAN_ANTONIO_ALTO', 'Esc. Genoveva Rios', '-16.50160236949388', '-68.10796988429503');
+INSERT INTO `resintoCoor` VALUES (135, '6', 'IV_CENTENARIO', 'Escuela Superior de FormaciÃ³n de Maestros Simon Bolivar', '-16.51790755810157', '-68.1129813194275');
+INSERT INTO `resintoCoor` VALUES (136, '6', 'CHUQUIAGUILLO', 'Esc. Pablo Iturri', '-16.45960763296027', '-68.10291767120363');
+INSERT INTO `resintoCoor` VALUES (137, '6', 'SAN_ANTONIO_BAJO', 'Esc. San Martin', '-16.498002993870788', '-68.11594247817995');
+INSERT INTO `resintoCoor` VALUES (138, '6', 'VILLA_FATIMA', 'Colegio Simon Rodriguez', '-16.476110751751737', '-68.12130689620973');
+INSERT INTO `resintoCoor` VALUES (139, '6', 'MIRAFLORES_ALTO', 'Esc. Alfredo Vargas', '-16.48341529945492', '-68.12499761581422');
+INSERT INTO `resintoCoor` VALUES (140, '6', 'SAN_ANTONIO_BAJO', 'Escuela 6 de Agosto', '-16.49561636593008', '-68.11744451522829');
+INSERT INTO `resintoCoor` VALUES (141, '6', 'VILLA_LITORAL', 'Sede Social Villa Litoral', '-16.506297193074165', '-68.10787772526965');
+INSERT INTO `resintoCoor` VALUES (142, '6', 'VILLA_FATIMA', 'Complejo Deportivo Camiri', '-16.478651821988915', '-68.11726950109005');
+INSERT INTO `resintoCoor` VALUES (143, '6', 'ARMANDO_ESCOBAR_URIA', 'Col. Caracas', '-16.492056943705794', '-68.1092691421509');
+INSERT INTO `resintoCoor` VALUES (144, '6', 'VILLA_EL_CARMEN', 'U. E. Andina', '-16.46901170204806', '-68.11501979827882');
+INSERT INTO `resintoCoor` VALUES (145, '6', 'MIRAFLORES', 'Esc. Alonzo De Mendoza', '-16.502714440175307', '-68.1231737136841');
+INSERT INTO `resintoCoor` VALUES (146, '6', 'MIRAFLORES', 'Escuela Piloto Naciones Unidas', '-16.49944318614221', '-68.11883926391603');
+INSERT INTO `resintoCoor` VALUES (147, '6', 'MIRAFLORES', '(CÃ¡rcel) C.O.F. Miraflores', '-16.500996966376324', '-68.11906970338896');
+INSERT INTO `resintoCoor` VALUES (148, '6', 'SAN_ANTONIO_BAJO', 'Sede Junta Vecinal', '-16.501976074176063', '-68.11435678973795');
+INSERT INTO `resintoCoor` VALUES (149, '6', 'SAN_ANTONIO_ALTO', 'Cancha Deportiva San Antonio Alto', '-16.500821645844482', '-68.1079387664795');
+INSERT INTO `resintoCoor` VALUES (150, '6', 'SAN_JUAN_DE_LAZARETO', 'Tecnico Ayacucho (San Juan)', '-16.48525014901605', '-68.12150485580787');
+INSERT INTO `resintoCoor` VALUES (151, '6', 'IV_CENTENARIO', 'Escuela Pedro Poveda (IV Centenario)', '-16.510394344244688', '-68.11259663198143');
+INSERT INTO `resintoCoor` VALUES (152, '6', 'VILLA_LA_MERCED', 'Colegio Ave Maria (Villa la Merced)', '-16.474341052405332', '-68.11802829382943');
+INSERT INTO `resintoCoor` VALUES (153, '6', 'MIRAFLORES', 'DORA SMITH', '-16.50289446041054', '-68.12237441539766');
+INSERT INTO `resintoCoor` VALUES (154, '6', 'SAN_ANTONIO_BAJO', 'COLEGIO JHON F KENNEDY', '', '');
+INSERT INTO `resintoCoor` VALUES (155, '6', 'VILLA_COPACABANA', 'COLEGIO LA PAZ', '-16.489557079134894', '-68.1167256832123');
+INSERT INTO `resintoCoor` VALUES (156, '6', 'IV_CENTENARIO', 'UNID. EDUC. SUPERIOR SIMON BOLIVAR', '-16.518123565385054', '-68.11293840408327');
+INSERT INTO `resintoCoor` VALUES (157, '6', 'MIRAFLORES', 'UNIDAD EDUCATIVA BICHITO DE LUZ NUESTRA SEÃ‘ORA DE ITAHI', '-16.50272472705041', '-68.12323808670045');
+INSERT INTO `resintoCoor` VALUES (158, '6', 'VILLA_ARMONIA', 'PARROQUIA SEÃ‘OR DE LA SENTENCIA', '-16.508752741739517', '-68.11161875724794');
+INSERT INTO `resintoCoor` VALUES (159, '9', 'CHALLAPAMPA', 'Colegio Francia', '-16.48477253411946', '-68.14476222731174');
+INSERT INTO `resintoCoor` VALUES (160, '9', 'ACHACHICALA', 'Esc. Ind. Pedro Domingo Murillo', '-16.474772023663093', '-68.15194597933443');
+INSERT INTO `resintoCoor` VALUES (161, '9', 'VILLA_PABON', 'Esc. Natalia Palacios', '-16.49445169270071', '-68.1313666049391');
+INSERT INTO `resintoCoor` VALUES (162, '9', 'AGUA_DE_LA_VIDA', 'Col. American School', '-16.493130853234632', '-68.13223306322472');
+INSERT INTO `resintoCoor` VALUES (163, '9', 'CIUDADELA_FERROVIARIA', 'Esc. Gil Tapia Rada', '-16.457142879887083', '-68.15081379376352');
+INSERT INTO `resintoCoor` VALUES (164, '9', 'VILLA_VICTORIA', 'Unidad Educativa San Jose (U. E. Manuel B. Mariaca)', '-16.48997569457422', '-68.15281928982587');
+INSERT INTO `resintoCoor` VALUES (165, '9', 'CHAMOCO_CHICO', 'Colegio Holanda (Chamoco Chico)', '-16.498144421708812', '-68.15085649956019');
+INSERT INTO `resintoCoor` VALUES (166, '9', 'ZONA_NORTE', 'Colegio Luis Alberto Pabon', '-16.49115498208239', '-68.13416259828955');
+INSERT INTO `resintoCoor` VALUES (167, '9', 'CALLAMPAYA', 'Colegio Max Toledo (Callampaya)', '-16.494243294094684', '-68.15342517569663');
+INSERT INTO `resintoCoor` VALUES (168, '9', 'VILLA_DE_LA_CRUZ', 'Esc. Sergio Suarez', '-16.48701193243167', '-68.13206858932972');
+INSERT INTO `resintoCoor` VALUES (169, '9', 'LA_PORTADA', 'U.E. Copacabana (Fe y Alegria)', '-16.48914392807615', '-68.16403658129276');
+INSERT INTO `resintoCoor` VALUES (170, '9', 'PANTICIRCA', 'Col. Luis Velasco Flores', '-16.46143696558926', '-68.15841685049237');
+INSERT INTO `resintoCoor` VALUES (171, '9', 'CIUDADELA_FERROVIARIA', 'Kinder Bolivia', '-16.45199143116499', '-68.14942338271068');
+INSERT INTO `resintoCoor` VALUES (172, '9', 'MUNAYPATA', 'Col. Guillen Pinto', '-16.487066605977695', '-68.15577370114626');
+INSERT INTO `resintoCoor` VALUES (173, '9', 'LA_ZARZUELA', 'Kinder Flora Perez De Saavedra', '-16.48341650506836', '-68.14493872923778');
+INSERT INTO `resintoCoor` VALUES (174, '9', 'PURA_PURA', 'Col. San Javier', '-16.486836478669193', '-68.15128804184498');
+INSERT INTO `resintoCoor` VALUES (175, '9', 'BAJO_MARISCAL_SANTA_CRUZ', 'Esc. Club De Leones (Bajo Mariscal)', '-16.494550024938416', '-68.15945440437646');
+INSERT INTO `resintoCoor` VALUES (176, '9', 'VINO_TINTO', 'Esc. Nicolas  Fernandez Naranjo', '-16.483313465279746', '-68.14045510254802');
+INSERT INTO `resintoCoor` VALUES (177, '9', 'ZONA_NORTE', 'Liceo Tec. H. Nuestra Sra. De La Paz', '-16.49125773639885', '-68.13541183713825');
+INSERT INTO `resintoCoor` VALUES (178, '9', 'ALTO_ACHACHICALA', 'Sede Social Plan Autopista', '-16.458250422991416', '-68.14622702775524');
+INSERT INTO `resintoCoor` VALUES (179, '9', 'ALTO_MARISCAL_SANTA_CRUZ', 'Colegio Italia (Alto Mariscal)', '-16.494200939240656', '-68.16125052049757');
+INSERT INTO `resintoCoor` VALUES (180, '9', 'VILLA_VICTORIA', 'Col. Franz Tamayo', '-16.490477171933442', '-68.15221751108767');
+INSERT INTO `resintoCoor` VALUES (181, '9', 'MUNAYPATA', 'Col. Marien Garten', '-16.490619951490423', '-68.16059855511413');
+INSERT INTO `resintoCoor` VALUES (182, '9', 'CHALLAPAMPA', 'Escuela Republica del Brasil', '-16.49022681518041', '-68.14104145858438');
+INSERT INTO `resintoCoor` VALUES (183, '9', 'PURA_PURA_ALTO', 'Unid. Educ. 20 De Octubre NÂ° 1', '-16.46124808472961', '-68.16100681666285');
+INSERT INTO `resintoCoor` VALUES (184, '9', 'SANTA_BARBARA', 'U.E. Carlos Salinas', '-16.49807777643988', '-68.13053826335819');
+INSERT INTO `resintoCoor` VALUES (185, '9', 'SANTA_BARBARA', 'Dir. Distrital de EducaciÃ³n', '-16.49943848463913', '-68.1257807579823');
+INSERT INTO `resintoCoor` VALUES (186, '9', 'SAN_SEBASTIAN', 'Colegio German Busch', '-16.49223434172243', '-68.14014949835838');
+INSERT INTO `resintoCoor` VALUES (187, '9', 'SAN_LORENZO', 'Sede Social Caja Ferroviaria', '-16.446581112226024', '-68.15083265304567');
+INSERT INTO `resintoCoor` VALUES (188, '9', 'ALTO_ACHACHICALA', 'Unidad Educativa Litoral A', '-16.468600154959592', '-68.15061807632448');
+INSERT INTO `resintoCoor` VALUES (189, '9', 'PURA_PURA', 'Sede Social Pura Pura', '-16.47306539416894', '-68.1531071662903');
+INSERT INTO `resintoCoor` VALUES (190, '9', 'ZONA_NORTE', 'Colegio Antonio Diaz Villamil', '-16.49111913660601', '-68.13450164627284');
+INSERT INTO `resintoCoor` VALUES (191, '9', 'ZONA_CENTRAL', 'Col. Nacional Ayacucho', '-16.49427901843782', '-68.13398838043214');
+INSERT INTO `resintoCoor` VALUES (192, '9', 'PURA_PURA', 'Escuela Eloy Alvarez Plata', '-16.483843854370747', '-68.14803997054698');
+INSERT INTO `resintoCoor` VALUES (193, '9', 'ALTO_ACHACHICALA', 'Esc. Educacional Luis  Ernest', '-16.46669356325253', '-68.15166686195882');
+INSERT INTO `resintoCoor` VALUES (194, '9', 'CUSICANCHA', 'Sede Social de Cusicancha', '-16.485237213910686', '-68.16606621723624');
+INSERT INTO `resintoCoor` VALUES (195, '9', 'VILLA_PABON', 'Unidad Educativa Republica de China', '-16.494678596172612', '-68.1277381000109');
+INSERT INTO `resintoCoor` VALUES (196, '9', 'CALLAMPAYA', 'Unidad Educativa Fabril 18 de Mayo (Callampaya)', '-16.492457912419678', '-68.14609406981619');
+INSERT INTO `resintoCoor` VALUES (197, '9', 'ZONA_CENTRAL', 'Col. Santa Ana', '-16.496765520992984', '-68.13152810325847');
+INSERT INTO `resintoCoor` VALUES (198, '9', 'ALTO_LA_PORTADA', 'U.E. Abraham Reyes (Fe y Alegria)', '-16.48857163946561', '-68.16429323516786');
+INSERT INTO `resintoCoor` VALUES (199, '9', 'LA_ZARZUELA', 'Escuela John F. Kennedy', '-16.477119001484276', '-68.1515407562256');
+INSERT INTO `resintoCoor` VALUES (200, '9', 'LA_ZARZUELA', 'Esc. Abraham Lincoln', '-16.478929722522366', '-68.14686298370363');
+INSERT INTO `resintoCoor` VALUES (201, '9', 'LIMANIPATA', 'Esc. Limanipata 10 De Junio', '-16.44267092746923', '-68.14424514770509');
+INSERT INTO `resintoCoor` VALUES (202, '9', 'EL_TEJAR', 'U.E. Filadelfia', '-16.50021658184404', '-68.16104367608204');
+INSERT INTO `resintoCoor` VALUES (203, '9', 'SANTA_BARBARA', 'Coop. Educacional San Marcos Ltda.', '-16.499772532176447', '-68.13067157752813');
+INSERT INTO `resintoCoor` VALUES (204, '9', 'EL_TEJAR', 'Colegio Holanda (El Tejar)', '-16.498163394076403', '-68.15105191364638');
+INSERT INTO `resintoCoor` VALUES (205, '9', 'BAJO_MARISCAL_SANTA_CRUZ', 'Colegio Italia (Bajo Mariscal)', '-16.49411887809731', '-68.16118891334555');
+INSERT INTO `resintoCoor` VALUES (206, '9', 'BAJO_MARISCAL_SANTA_CRUZ', 'Colegio Max Toledo (Bajo Mariscal)', '-16.494420599691157', '-68.15363279543818');
+INSERT INTO `resintoCoor` VALUES (207, '9', 'PURA_PURA', 'Unidad Educativa Fabril 18 de Mayo (Pura Pura)', '-16.492503904418385', '-68.14614218194039');
+INSERT INTO `resintoCoor` VALUES (208, '9', 'EL_TEJAR', 'Esc. Club De Leones (El Tejar)', '-16.494632052149964', '-68.15951492171736');
+INSERT INTO `resintoCoor` VALUES (209, '9', 'ACHACHICALA', 'COL. EDUCACIONAL AMERICA', '-16.47256125941074', '-68.15046787261964');
+INSERT INTO `resintoCoor` VALUES (210, '9', 'LA_PORTADA', 'COLEGIO FE Y ALEGRIA', '-16.48936161511197', '-68.16435098648073');
+INSERT INTO `resintoCoor` VALUES (211, '9', 'SANTA_BARBARA', 'INSTITUTO PRINCIPE DE PAZ', '-16.498429909126507', '-68.13104867935182');
+INSERT INTO `resintoCoor` VALUES (212, '9', 'EL_TEJAR', 'PARROQUIA EL SALVADOR', '-16.4953591844379', '-68.16004872322084');
+INSERT INTO `resintoCoor` VALUES (213, '9', 'ZONA_NORTE', 'UNID. EDUC. GENARO GAMARRA', '-16.49154771465278', '-68.13484132289888');
+INSERT INTO `resintoCoor` VALUES (214, '9', 'ZONA_CENTRAL', 'UNIDAD EDUCATIVA VENEZUELA', '-16.49394468012049', '-68.13503980636598');
 
 -- ----------------------------
 -- Table structure for voto
@@ -329,7 +752,7 @@ CREATE TABLE `voto`  (
   `cantidad` int(20) NOT NULL,
   `porcentaje` float NOT NULL,
   PRIMARY KEY (`idVoto`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 111 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of voto
@@ -338,122 +761,112 @@ INSERT INTO `voto` VALUES (1, 1, 1, 12, 5.74);
 INSERT INTO `voto` VALUES (2, 1, 2, 9, 4.31);
 INSERT INTO `voto` VALUES (3, 1, 3, 112, 53.59);
 INSERT INTO `voto` VALUES (4, 1, 4, 21, 10.05);
-INSERT INTO `voto` VALUES (5, 2, 1, 9, 4.29);
-INSERT INTO `voto` VALUES (6, 2, 2, 16, 7.62);
-INSERT INTO `voto` VALUES (7, 2, 3, 114, 54.29);
-INSERT INTO `voto` VALUES (8, 2, 4, 31, 14.76);
-INSERT INTO `voto` VALUES (9, 3, 1, 10, 4.81);
-INSERT INTO `voto` VALUES (10, 3, 2, 12, 5.77);
-INSERT INTO `voto` VALUES (11, 3, 3, 111, 53.37);
-INSERT INTO `voto` VALUES (12, 3, 4, 30, 14.42);
-INSERT INTO `voto` VALUES (13, 4, 1, 11, 5.07);
-INSERT INTO `voto` VALUES (14, 4, 2, 13, 5.99);
-INSERT INTO `voto` VALUES (15, 4, 3, 144, 66.36);
-INSERT INTO `voto` VALUES (16, 4, 4, 17, 7.83);
-INSERT INTO `voto` VALUES (17, 5, 1, 15, 6.98);
-INSERT INTO `voto` VALUES (18, 5, 2, 5, 2.33);
-INSERT INTO `voto` VALUES (19, 5, 3, 133, 61.86);
-INSERT INTO `voto` VALUES (20, 5, 4, 16, 7.44);
-INSERT INTO `voto` VALUES (21, 6, 1, 9, 4.39);
-INSERT INTO `voto` VALUES (22, 6, 2, 7, 3.41);
-INSERT INTO `voto` VALUES (23, 6, 3, 131, 63.9);
-INSERT INTO `voto` VALUES (24, 6, 4, 25, 12.2);
-INSERT INTO `voto` VALUES (25, 7, 1, 18, 9);
-INSERT INTO `voto` VALUES (26, 7, 2, 12, 6);
-INSERT INTO `voto` VALUES (27, 7, 3, 97, 48.5);
-INSERT INTO `voto` VALUES (28, 7, 4, 32, 16);
-INSERT INTO `voto` VALUES (29, 8, 1, 10, 4.93);
-INSERT INTO `voto` VALUES (30, 8, 2, 18, 8.87);
-INSERT INTO `voto` VALUES (31, 8, 3, 103, 50.74);
-INSERT INTO `voto` VALUES (32, 8, 4, 28, 13.79);
-INSERT INTO `voto` VALUES (33, 9, 1, 8, 3.79);
-INSERT INTO `voto` VALUES (34, 9, 2, 9, 4.27);
-INSERT INTO `voto` VALUES (35, 9, 3, 128, 60.66);
-INSERT INTO `voto` VALUES (36, 9, 4, 33, 15.64);
-INSERT INTO `voto` VALUES (37, 10, 1, 16, 7.69);
-INSERT INTO `voto` VALUES (38, 10, 2, 18, 8.65);
-INSERT INTO `voto` VALUES (39, 10, 3, 115, 55.29);
-INSERT INTO `voto` VALUES (40, 10, 4, 19, 9.13);
-INSERT INTO `voto` VALUES (41, 11, 1, 13, 6.4);
-INSERT INTO `voto` VALUES (42, 11, 2, 16, 7.88);
-INSERT INTO `voto` VALUES (43, 11, 3, 95, 46.8);
-INSERT INTO `voto` VALUES (44, 11, 4, 28, 13.79);
-INSERT INTO `voto` VALUES (45, 12, 1, 17, 8.17);
-INSERT INTO `voto` VALUES (46, 12, 2, 6, 2.88);
-INSERT INTO `voto` VALUES (47, 12, 3, 138, 66.35);
-INSERT INTO `voto` VALUES (48, 12, 4, 16, 7.69);
-INSERT INTO `voto` VALUES (49, 13, 1, 11, 5.19);
-INSERT INTO `voto` VALUES (50, 13, 2, 11, 5.19);
-INSERT INTO `voto` VALUES (51, 13, 3, 111, 52.36);
-INSERT INTO `voto` VALUES (52, 13, 4, 30, 14.15);
-INSERT INTO `voto` VALUES (53, 14, 1, 13, 6.19);
-INSERT INTO `voto` VALUES (54, 14, 2, 17, 8.1);
-INSERT INTO `voto` VALUES (55, 14, 3, 102, 48.57);
-INSERT INTO `voto` VALUES (56, 14, 4, 29, 13.81);
-INSERT INTO `voto` VALUES (57, 15, 1, 10, 5.08);
-INSERT INTO `voto` VALUES (58, 15, 2, 11, 5.58);
-INSERT INTO `voto` VALUES (59, 15, 3, 98, 49.75);
-INSERT INTO `voto` VALUES (60, 15, 4, 29, 14.72);
-INSERT INTO `voto` VALUES (61, 16, 1, 5, 2.4);
-INSERT INTO `voto` VALUES (62, 16, 2, 14, 6.73);
-INSERT INTO `voto` VALUES (63, 16, 3, 128, 61.54);
-INSERT INTO `voto` VALUES (64, 16, 4, 25, 12.02);
-INSERT INTO `voto` VALUES (65, 17, 1, 18, 8.65);
-INSERT INTO `voto` VALUES (66, 17, 2, 21, 10.1);
-INSERT INTO `voto` VALUES (67, 17, 3, 124, 59.62);
-INSERT INTO `voto` VALUES (68, 17, 4, 15, 7.21);
-INSERT INTO `voto` VALUES (69, 18, 1, 12, 5.83);
-INSERT INTO `voto` VALUES (70, 18, 2, 21, 10.19);
-INSERT INTO `voto` VALUES (71, 18, 3, 100, 48.54);
-INSERT INTO `voto` VALUES (72, 18, 4, 20, 9.71);
-INSERT INTO `voto` VALUES (73, 19, 1, 7, 3.54);
-INSERT INTO `voto` VALUES (74, 19, 2, 11, 5.56);
-INSERT INTO `voto` VALUES (75, 19, 3, 108, 54.55);
-INSERT INTO `voto` VALUES (76, 19, 4, 34, 17.17);
-INSERT INTO `voto` VALUES (77, 20, 1, 13, 6.7);
-INSERT INTO `voto` VALUES (78, 20, 2, 8, 4.12);
-INSERT INTO `voto` VALUES (79, 20, 3, 97, 50);
-INSERT INTO `voto` VALUES (80, 20, 4, 27, 13.92);
-INSERT INTO `voto` VALUES (81, 21, 1, 11, 5.39);
-INSERT INTO `voto` VALUES (82, 21, 2, 12, 5.88);
-INSERT INTO `voto` VALUES (83, 21, 3, 114, 55.88);
-INSERT INTO `voto` VALUES (84, 21, 4, 34, 16.67);
-INSERT INTO `voto` VALUES (85, 22, 1, 5, 3.85);
-INSERT INTO `voto` VALUES (86, 22, 2, 7, 5.38);
-INSERT INTO `voto` VALUES (87, 22, 3, 76, 58.46);
-INSERT INTO `voto` VALUES (88, 22, 4, 11, 8.46);
-INSERT INTO `voto` VALUES (89, 23, 1, 9, 4.19);
-INSERT INTO `voto` VALUES (90, 23, 2, 14, 6.51);
-INSERT INTO `voto` VALUES (91, 23, 3, 104, 48.37);
-INSERT INTO `voto` VALUES (92, 23, 4, 34, 15.81);
-INSERT INTO `voto` VALUES (93, 24, 1, 14, 6.33);
-INSERT INTO `voto` VALUES (94, 24, 2, 9, 4.07);
-INSERT INTO `voto` VALUES (95, 24, 3, 142, 64.25);
-INSERT INTO `voto` VALUES (96, 24, 4, 20, 9.05);
-INSERT INTO `voto` VALUES (97, 25, 1, 11, 5.26);
-INSERT INTO `voto` VALUES (98, 25, 2, 11, 5.26);
-INSERT INTO `voto` VALUES (99, 25, 3, 96, 45.93);
-INSERT INTO `voto` VALUES (100, 25, 4, 39, 18.66);
-INSERT INTO `voto` VALUES (101, 26, 1, 11, 5.07);
-INSERT INTO `voto` VALUES (102, 26, 2, 6, 2.76);
-INSERT INTO `voto` VALUES (103, 26, 3, 122, 56.22);
-INSERT INTO `voto` VALUES (104, 26, 4, 33, 15.21);
-INSERT INTO `voto` VALUES (105, 27, 1, 13, 6.02);
-INSERT INTO `voto` VALUES (106, 27, 2, 15, 6.94);
-INSERT INTO `voto` VALUES (107, 27, 3, 118, 54.63);
-INSERT INTO `voto` VALUES (108, 27, 4, 23, 10.65);
-INSERT INTO `voto` VALUES (109, 28, 1, 14, 6.57);
-INSERT INTO `voto` VALUES (110, 28, 2, 12, 5.63);
-INSERT INTO `voto` VALUES (111, 28, 3, 113, 53.05);
-INSERT INTO `voto` VALUES (112, 28, 4, 31, 14.55);
-INSERT INTO `voto` VALUES (113, 29, 1, 17, 7.69);
-INSERT INTO `voto` VALUES (114, 29, 2, 22, 9.95);
-INSERT INTO `voto` VALUES (115, 29, 3, 101, 45.7);
-INSERT INTO `voto` VALUES (116, 29, 4, 34, 15.38);
-INSERT INTO `voto` VALUES (117, 30, 1, 11, 8.27);
-INSERT INTO `voto` VALUES (118, 30, 2, 8, 6.02);
-INSERT INTO `voto` VALUES (119, 30, 3, 60, 45.11);
-INSERT INTO `voto` VALUES (120, 30, 4, 25, 18.8);
+INSERT INTO `voto` VALUES (5, 1, 5, 55, 26.32);
+INSERT INTO `voto` VALUES (6, 2, 1, 9, 4.29);
+INSERT INTO `voto` VALUES (7, 2, 2, 16, 7.62);
+INSERT INTO `voto` VALUES (8, 2, 3, 114, 54.29);
+INSERT INTO `voto` VALUES (9, 2, 4, 31, 14.76);
+INSERT INTO `voto` VALUES (10, 2, 5, 40, 19.05);
+INSERT INTO `voto` VALUES (11, 3, 1, 10, 4.81);
+INSERT INTO `voto` VALUES (12, 3, 2, 12, 5.77);
+INSERT INTO `voto` VALUES (13, 3, 3, 111, 53.37);
+INSERT INTO `voto` VALUES (14, 3, 4, 30, 14.42);
+INSERT INTO `voto` VALUES (15, 3, 5, 45, 21.63);
+INSERT INTO `voto` VALUES (16, 4, 1, 11, 5.07);
+INSERT INTO `voto` VALUES (17, 4, 2, 13, 5.99);
+INSERT INTO `voto` VALUES (18, 4, 3, 144, 66.36);
+INSERT INTO `voto` VALUES (19, 4, 4, 17, 7.83);
+INSERT INTO `voto` VALUES (20, 4, 5, 32, 14.75);
+INSERT INTO `voto` VALUES (21, 5, 1, 15, 6.98);
+INSERT INTO `voto` VALUES (22, 5, 2, 5, 2.33);
+INSERT INTO `voto` VALUES (23, 5, 3, 133, 61.86);
+INSERT INTO `voto` VALUES (24, 5, 4, 16, 7.44);
+INSERT INTO `voto` VALUES (25, 5, 5, 46, 21.4);
+INSERT INTO `voto` VALUES (26, 6, 1, 9, 4.39);
+INSERT INTO `voto` VALUES (27, 6, 2, 7, 3.41);
+INSERT INTO `voto` VALUES (28, 6, 3, 131, 63.9);
+INSERT INTO `voto` VALUES (29, 6, 4, 25, 12.2);
+INSERT INTO `voto` VALUES (30, 6, 5, 33, 16.1);
+INSERT INTO `voto` VALUES (31, 7, 1, 18, 9);
+INSERT INTO `voto` VALUES (32, 7, 2, 12, 6);
+INSERT INTO `voto` VALUES (33, 7, 3, 97, 48.5);
+INSERT INTO `voto` VALUES (34, 7, 4, 32, 16);
+INSERT INTO `voto` VALUES (35, 7, 5, 41, 20.5);
+INSERT INTO `voto` VALUES (36, 8, 1, 10, 4.93);
+INSERT INTO `voto` VALUES (37, 8, 2, 18, 8.87);
+INSERT INTO `voto` VALUES (38, 8, 3, 103, 50.74);
+INSERT INTO `voto` VALUES (39, 8, 4, 28, 13.79);
+INSERT INTO `voto` VALUES (40, 8, 5, 44, 21.67);
+INSERT INTO `voto` VALUES (41, 9, 1, 8, 3.79);
+INSERT INTO `voto` VALUES (42, 9, 2, 9, 4.27);
+INSERT INTO `voto` VALUES (43, 9, 3, 128, 60.66);
+INSERT INTO `voto` VALUES (44, 9, 4, 33, 15.64);
+INSERT INTO `voto` VALUES (45, 9, 5, 33, 15.64);
+INSERT INTO `voto` VALUES (46, 10, 1, 16, 7.69);
+INSERT INTO `voto` VALUES (47, 10, 2, 18, 8.65);
+INSERT INTO `voto` VALUES (48, 10, 3, 115, 55.29);
+INSERT INTO `voto` VALUES (49, 10, 4, 19, 9.13);
+INSERT INTO `voto` VALUES (50, 10, 5, 40, 19.23);
+INSERT INTO `voto` VALUES (51, 11, 1, 13, 6.4);
+INSERT INTO `voto` VALUES (52, 11, 2, 16, 7.88);
+INSERT INTO `voto` VALUES (53, 11, 3, 95, 46.8);
+INSERT INTO `voto` VALUES (54, 11, 4, 28, 13.79);
+INSERT INTO `voto` VALUES (55, 11, 5, 51, 25.12);
+INSERT INTO `voto` VALUES (56, 12, 1, 17, 8.17);
+INSERT INTO `voto` VALUES (57, 12, 2, 6, 2.88);
+INSERT INTO `voto` VALUES (58, 12, 3, 138, 66.35);
+INSERT INTO `voto` VALUES (59, 12, 4, 16, 7.69);
+INSERT INTO `voto` VALUES (60, 12, 5, 31, 14.9);
+INSERT INTO `voto` VALUES (61, 13, 1, 11, 5.19);
+INSERT INTO `voto` VALUES (62, 13, 2, 11, 5.19);
+INSERT INTO `voto` VALUES (63, 13, 3, 111, 52.36);
+INSERT INTO `voto` VALUES (64, 13, 4, 30, 14.15);
+INSERT INTO `voto` VALUES (65, 13, 5, 49, 23.11);
+INSERT INTO `voto` VALUES (66, 14, 1, 13, 6.19);
+INSERT INTO `voto` VALUES (67, 14, 2, 17, 8.1);
+INSERT INTO `voto` VALUES (68, 14, 3, 102, 48.57);
+INSERT INTO `voto` VALUES (69, 14, 4, 29, 13.81);
+INSERT INTO `voto` VALUES (70, 14, 5, 49, 23.33);
+INSERT INTO `voto` VALUES (71, 15, 1, 10, 5.08);
+INSERT INTO `voto` VALUES (72, 15, 2, 11, 5.58);
+INSERT INTO `voto` VALUES (73, 15, 3, 98, 49.75);
+INSERT INTO `voto` VALUES (74, 15, 4, 29, 14.72);
+INSERT INTO `voto` VALUES (75, 15, 5, 49, 24.87);
+INSERT INTO `voto` VALUES (76, 16, 1, 5, 2.4);
+INSERT INTO `voto` VALUES (77, 16, 2, 14, 6.73);
+INSERT INTO `voto` VALUES (78, 16, 3, 128, 61.54);
+INSERT INTO `voto` VALUES (79, 16, 4, 25, 12.02);
+INSERT INTO `voto` VALUES (80, 16, 5, 36, 17.31);
+INSERT INTO `voto` VALUES (81, 17, 1, 18, 8.65);
+INSERT INTO `voto` VALUES (82, 17, 2, 21, 10.1);
+INSERT INTO `voto` VALUES (83, 17, 3, 124, 59.62);
+INSERT INTO `voto` VALUES (84, 17, 4, 15, 7.21);
+INSERT INTO `voto` VALUES (85, 17, 5, 30, 14.42);
+INSERT INTO `voto` VALUES (86, 18, 1, 12, 5.83);
+INSERT INTO `voto` VALUES (87, 18, 2, 21, 10.19);
+INSERT INTO `voto` VALUES (88, 18, 3, 100, 48.54);
+INSERT INTO `voto` VALUES (89, 18, 4, 20, 9.71);
+INSERT INTO `voto` VALUES (90, 18, 5, 53, 25.73);
+INSERT INTO `voto` VALUES (91, 19, 1, 7, 3.54);
+INSERT INTO `voto` VALUES (92, 19, 2, 11, 5.56);
+INSERT INTO `voto` VALUES (93, 19, 3, 108, 54.55);
+INSERT INTO `voto` VALUES (94, 19, 4, 34, 17.17);
+INSERT INTO `voto` VALUES (95, 19, 5, 38, 19.19);
+INSERT INTO `voto` VALUES (96, 20, 1, 13, 6.7);
+INSERT INTO `voto` VALUES (97, 20, 2, 8, 4.12);
+INSERT INTO `voto` VALUES (98, 20, 3, 97, 50);
+INSERT INTO `voto` VALUES (99, 20, 4, 27, 13.92);
+INSERT INTO `voto` VALUES (100, 20, 5, 49, 25.26);
+INSERT INTO `voto` VALUES (101, 21, 1, 11, 5.39);
+INSERT INTO `voto` VALUES (102, 21, 2, 12, 5.88);
+INSERT INTO `voto` VALUES (103, 21, 3, 114, 55.88);
+INSERT INTO `voto` VALUES (104, 21, 4, 34, 16.67);
+INSERT INTO `voto` VALUES (105, 21, 5, 33, 16.18);
+INSERT INTO `voto` VALUES (106, 22, 1, 5, 3.85);
+INSERT INTO `voto` VALUES (107, 22, 2, 7, 5.38);
+INSERT INTO `voto` VALUES (108, 22, 3, 76, 58.46);
+INSERT INTO `voto` VALUES (109, 22, 4, 11, 8.46);
+INSERT INTO `voto` VALUES (110, 22, 5, 31, 23.85);
 
 -- ----------------------------
 -- Table structure for zona

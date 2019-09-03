@@ -2,7 +2,7 @@
     include '../conexion.php';
 
     // Realizar una consulta SQL
-    $sql = "SELECT * FROM recinto";
+    $sql = "SELECT *, r.name AS recinto, e.name AS eleccion FROM recinto AS r, recintoElec AS re, elecciones AS e WHERE r.idRecinto = re.idRecinto AND re.idElecciones = e.idElecciones";
 
     $query = $db->Execute($sql);
 
@@ -37,9 +37,10 @@
             'properties' => array(
                 '@id'            => $row['idRecinto'],
                 'id'             => $row['idRecinto'],
-                'circuncripcion' => $row['circuns'],
+                'elec'           => $row['eleccion'],
+                'circunscripcion' => $row['circuns'],
                 'zona'           => $row['zona'],
-                'recinto'        => $row['name'],
+                'recinto'        => $row['recinto'],
                 'porcentaje'     => $row['porcentaje']
                 //'fecha' => $fecha
             )
