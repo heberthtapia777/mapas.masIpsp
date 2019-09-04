@@ -2,7 +2,7 @@
 	include 'conexion.php';
 	require 'Classes/PHPExcel/IOFactory.php';
 
-	$nombreArchivo = 'recintos/001 ESC IND PEDRO DOMINGO MURILLO.xlsx';
+	$nombreArchivo = 'recintos/003 COL EDUCACIONAL AMERICA.xlsx';
 
 	$objPHPExel = PHPEXCEL_IOFactory::load($nombreArchivo);
 
@@ -64,7 +64,7 @@
 			exit();
 		}
 
-		$rec     = "SELECT * FROM recinto WHERE name = 'ESC IND PEDRO DOMINGO MURILLO' ";
+		$rec     = "SELECT * FROM recinto WHERE name = 'COL EDUCACIONAL AMERICA' ";
 		$str     = $db->Execute($rec);
 		$num 	 = $str->recordCount();
 		$row     = $str->FetchRow();
@@ -75,7 +75,7 @@
 			$lastId = $db->insert_Id();
 
 			$srt = "INSERT INTO voto (idMesa, idPartido, cantidad, porcentaje) ";
-			$srt.= "VALUES ('$lastId', '1', '$partido1', '$partido1p' )";
+			$srt.= "VALUES ('$lastId', '1', '$partido1', '$partido1p' )";			
 
 			$qu  = $db->Execute($srt);
 
