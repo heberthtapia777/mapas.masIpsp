@@ -189,31 +189,7 @@ function cargarMapa(){
      var img;
      // capa flotante donde se muestra la info al darle click sobre un maker
 
-function capa(data){
 
-          if (info != undefined) { // se valida si existe informacion en la capa, si es borra la capa
-              info.remove(mapa); // esta linea quita la capa flotante
-          }
-
-          info = L.control({position: 'bottomleft'});
-
-          info.onAdd = function (mapa) {
-              this._div = L.DomUtil.create('div', 'info');
-              this.update(data);
-              return this._div;
-          };
-
-          info.update = function (data) {
-
-        };
-          info.addTo(mapa);
-      }
-
-      // variable que guarda los detalles del marker al que se le dio click
-      var eventBackup;
-      // variable auxiliar que guarda el tag img con su src
-      var x;
-      // funcion que se ejecuta cuando se da click sobre un maker del mapa
 function onClick(elec, cir, zon, rec, por, id) {
 
     $('#myModal').on('show.bs.modal', function() {
@@ -226,7 +202,7 @@ function onClick(elec, cir, zon, rec, por, id) {
                 "ordering": false,
                 "info":     false,
                 "searching": false,
-                scrollY:        400,
+
                 scrollCollapse: true,
                 paging:         false,
                 "aoColumns":[
@@ -252,11 +228,35 @@ function onClick(elec, cir, zon, rec, por, id) {
                             console.log(data.responseText);
                         }
                     },
+                'initComplete': function (settings, json){
+                    var c = 0;
+                    this.api().columns().every(function(){
+                        var column = this;
+
+                        var sum = column
+                            .data()
+                            .reduce(function (a, b) {
+                               a = parseInt(a, 10);
+                               if(isNaN(a)){ a = 0; }
+
+                               b = parseInt(b, 10);
+                               if(isNaN(b)){ b = 0; }
+
+                               return a + b;
+                            });
+
+                            graf[c] = (sum);
+                            c++;
+
+                        $(column.footer()).html(sum);
+                    });
+                    $('tfoot tr th:first').html('TOTAL');
+                },
                 "bDestroy": true
 
             }).DataTable();
 
-            $('.table').css('width', '834px');
+
             $('.c').css('width', '45px');
             $('.d').css('width', '50px');
         });
@@ -272,29 +272,71 @@ function onClick(elec, cir, zon, rec, por, id) {
     $('#myModal').find('#rec').html(rec);
     $('#myModal').find('#por').html(por+'%');
 
+    window.chartColors = {
+        mas: 'rgb(0, 38, 255)',
+        ud:  'rgb(253, 202, 56)',
+        pdc: 'rgb(252, 0, 0)',
+        msm: 'rgb(132, 254, 2)',
+        pvb: 'rgb(55, 93, 50)'
+    };
+
+    var chartColors = window.chartColors;
+    var color = Chart.helpers.color;
+    var config = {
+        data: {
+            datasets: [{
+                data: [
+                    graf[3],
+                    graf[5],
+                    graf[4],
+                    graf[2],
+                    graf[1]
+                ],
+                backgroundColor: [
+                    color(chartColors.mas).alpha(1).rgbString(),
+                    color(chartColors.ud).alpha(1).rgbString(),
+                    color(chartColors.pdc).alpha(1).rgbString(),
+                    color(chartColors.msm).alpha(1).rgbString(),
+                    color(chartColors.pvb).alpha(1).rgbString(),
+                ],
+                label: 'My dataset' // for legend
+            }],
+            labels: [
+                'MAS-IPSP',
+                'UD',
+                'PDC',
+                'MSM',
+                'PVB-IEP'
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'right',
+            },
+            title: {
+                display: true,
+                text: 'GRAFICO'
+            },
+            scale: {
+                ticks: {
+                    beginAtZero: true
+                },
+                reverse: false
+            },
+            animation: {
+                animateRotate: false,
+                animateScale: true
+            }
+        }
+    };
+
     var chart = $('#chart-area');
     Chart.PolarArea(chart, config);
 
 
 }
 
-function showModal(c){
-        //console.log(c);
-        Swal.fire({
-            position: 'top-end',
-            title: '<strong>HTML <u>example</u></strong>',
-            type: 'info',
-            html: c,
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-                '<i class="fa fa-thumbs-up"></i> Great!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-                '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
-        })
-    };
+
 
 

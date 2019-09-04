@@ -50,14 +50,32 @@
             li {
                 margin:0 0 2px 18px;
             }
+            .modal-md {
+                width: 700px;
+            }
             #myModal.modal{
                 left: auto;
+            }
+            #myModal .modal-dialog{
+                margin-right: 17px;
             }
             canvas {
                 -moz-user-select: none;
                 -webkit-user-select: none;
                 -ms-user-select: none;
             }
+            table#datosElec{
+                font-size: 12px;
+            }
+            .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+
+                padding: 5px;
+                line-height: 1.42857143;
+                vertical-align: top;
+                border-top: 1px solid #ddd;
+
+            }
+
         </style>
     </head>
 <body>
@@ -89,14 +107,7 @@
     var markerBackup = new Array();
     var markerAux = new Array();
 
-    var iconDefault = "images/blue.png";
-    var iconActive = "images/red.png";
-    var defaultMarker = L.icon({
-        iconUrl: iconDefault,
-     });
-    var activeMarker = L.icon({
-        iconUrl: iconActive,
-    });
+    var graf = new Array();
 
     function stylePolygon(feature) {
       return {
@@ -213,8 +224,8 @@ var chartColors = window.chartColors;
 </script>
 
 <!-- Modal -->
-<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -224,10 +235,10 @@ var chartColors = window.chartColors;
                 <p><strong>CIRCUNSCRIPCION: </strong><span id="cir"></span></p>
                 <p><strong>ZONA: </strong><span id="zon"></span></p>
                 <p><strong>RECINTO: </strong><span id="rec"></span></p>
-                <p><strong>PORCENTAJE: </strong><span id="por"></span></p>
+                <p><strong>PORCENTAJE MAS-IPSP: </strong><span id="por"></span></p>
 
 
-                <table id="datosElec" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" >
+                <table id="datosElec" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" width="100%" >
                     <thead>
                         <tr>
                             <th id="m">MESA</th>
@@ -242,6 +253,21 @@ var chartColors = window.chartColors;
                             <th>EMITIDOS</th>
                         </tr>
                     </thead>
+
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <div id="canvas-holder" style="width:100%" align="center">
