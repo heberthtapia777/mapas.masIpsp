@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Leaflet sample</title>
+        <title>Mapa Detalle Votos</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""/>
         <link rel="stylesheet" type="text/css" href="css/font-awesome/css/all.css">
@@ -17,12 +17,10 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 
-
         <!-- Make sure you put this AFTER Leaflet's CSS -->
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
     crossorigin=""></script>
         <script src="src/leaflet-panel-layers.js" type="text/javascript" ></script>
-        <script src="js/leaflet_.js" type="text/javascript"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"
      type="text/javascript" ></script>
         <script src="js/leaflet-search.js" type="text/javascript"></script>
@@ -31,7 +29,10 @@
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js " type="text/javascript"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <!-- Plotly.js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <!-- Numeric JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 
         <style>
             .search-input {
@@ -86,9 +87,6 @@
 
     $(document).ready(function() {
         cargarMapa();
-        /*$('#myModal').modal({
-
-        })*/
     });
 
     // Variables y Objetos globales.
@@ -150,78 +148,257 @@
         layers: [osmBase]
     });
 
- // variable global donde se carga la capa flotante
-     var info;
-     // variable global donde se guarda la ruta de la imagen
-     var img;
-     // capa flotante donde se muestra la info al darle click sobre un maker
-
-var randomScalingFactor = function() {
-            return Math.round(Math.random() * 100);
-        };
-
-window.chartColors = {
-    red: 'rgb(255, 99, 132)',
-    orange: 'rgb(255, 159, 64)',
-    yellow: 'rgb(255, 205, 86)',
-    green: 'rgb(75, 192, 192)',
-    blue: 'rgb(54, 162, 235)',
-    purple: 'rgb(153, 102, 255)',
-    grey: 'rgb(201, 203, 207)'
-};
-
-var chartColors = window.chartColors;
-        var color = Chart.helpers.color;
-        var config = {
-            data: {
-                datasets: [{
-                    data: [
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                    ],
-                    backgroundColor: [
-                        color(chartColors.red).alpha(0.5).rgbString(),
-                        color(chartColors.orange).alpha(0.5).rgbString(),
-                        color(chartColors.yellow).alpha(0.5).rgbString(),
-                        color(chartColors.green).alpha(0.5).rgbString(),
-                        color(chartColors.blue).alpha(0.5).rgbString(),
-                    ],
-                    label: 'My dataset' // for legend
-                }],
-                labels: [
-                    'Red',
-                    'Orange',
-                    'Yellow',
-                    'Green',
-                    'Blue'
-                ]
-            },
-            options: {
-                responsive: true,
-                legend: {
-                    position: 'right',
-                },
-                title: {
-                    display: true,
-                    text: 'GRAFICO'
-                },
-                scale: {
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    reverse: false
-                },
-                animation: {
-                    animateRotate: false,
-                    animateScale: true
+function cargarMapa(){
+    // Hacer llamada ajax.
+    $.ajax({
+        url: "coordenadas.geojson",
+        dataType: 'json',
+        async: false,
+        type: 'post',
+        success: function(datos){
+            // Funcion que devuelve el estilo de un poligono.
+            function popup_(feature, layer) {
+                if (feature.name) {
+                    var info = feature.name;
+                    layer.bindPopup(info);
+                }else if(feature){
+                    layer.bindPopup(feature);
                 }
             }
-        };
+            var layerPoligonos = L.geoJson(datos, {
+                style: stylePolygon,
+                onEachFeature: popup_
+            }).addTo(mapa);
 
+            $.getJSON("server/consultaResintos.php", function(p_data_eventos){
+                var resintos = L.geoJson(p_data_eventos, {
+
+                    pointToLayer: function(feature, latlng){
+                        return L.circleMarker(latlng, style(feature));
+                    },
+                    onEachFeature: function (feature, layers) {
+                        var elec = feature.properties.elec;
+                        var cir = feature.properties.circunscripcion;
+                        var zon = feature.properties.zona;
+                        var rec = feature.properties.recinto;
+                        var por = feature.properties.porcentaje;
+                        var id = feature.properties.id;
+
+                        layers.bindPopup(rec).on('click',
+                            function() {
+                               onClick(elec, cir, zon, rec, por, id);
+                            }).addTo(mapa);
+
+                    }
+                }).addTo(mapa);
+
+                /**
+                 * GESTION DE COLORES
+                 */
+
+                function getColor(d) {
+                return d > 79.9   ? '#1F90FF' :
+                       d > 59.9   ? '#1CE867' :
+                       d > 39.9   ? '#FBFF2C' :
+                       d > 19.9   ? '#E8941C' :
+                                    '#FF2B31';
+                }
+
+                function style(feature) {
+                    return {
+                        fillColor: getColor(feature.properties.porcentaje),
+                        weight: 1,
+                        opacity: 1,
+                        color: 'white',
+                        dashArray: '2',
+                        fillOpacity: 0.8
+                    };
+                }
+
+                /**
+                 * LEYENDA
+                 */
+
+                var legend = L.control({position: 'bottomright'});
+
+                legend.onAdd = function (map) {
+                    var div = L.DomUtil.create('div', 'info legend'),
+                        grades = [00 , 20 , 40 , 60 , 80 ],
+                        labels = ['ROJO','NARANJA','AMARILLO','VERDE','AZUL'];
+                    // loop through our density intervals and generate a label with a colored square for each interval
+                    for (var i = 0; i < grades.length; i++) {
+                        div.innerHTML +=
+                            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                    }
+                    return div;
+                };
+                legend.addTo(mapa);
+
+                /**
+                 * MENU SUPERIOR
+                 */
+
+                var baseMaps = {
+                  "OSM": osmBase,
+                  "Mapnik": mapnik_layer,
+                  "Humanitarian": humanitarian_layer,
+                  "google": google
+                };
+                overlayMaps = {
+                    "Polígono": layerPoligonos,
+                    "Resintos": resintos
+                };
+
+                L.control.layers(baseMaps, overlayMaps, {
+                  position: 'topright', // 'topleft', 'bottomleft', 'bottomright'
+                  collapsed: true // true
+                }).addTo(mapa);
+
+            });
+
+        },
+        error: function(msgj) {
+            console.log("Error!!!");
+        }
+    });
+    /**
+     * Insertar Buscador al Mapa
+     */
+    mapa.addControl( new L.Control.Search({
+        url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+        jsonpParam: 'json_callback',
+        propertyName: 'display_name',
+        propertyLoc: ['lat','lon'],
+        marker: L.circleMarker([0,0],{radius:30}),
+        autoCollapse: true,
+        autoType: false,
+        minLength: 2
+    }) );
+}
+
+function onClick(elec, cir, zon, rec, por, id) {
+    $('#myModal').on('show.bs.modal', function() {
+        $tabla = $('#datosElec').dataTable({
+            "aProcessing": true,
+            "aServerSide": true,
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "searching": false,
+
+            scrollCollapse: true,
+            paging:         false,
+            "aoColumns":[
+                    {   "mDataProp": "0"},
+                    {   "mDataProp": "1"},
+                    {   "mDataProp": "2"},
+                    {   "mDataProp": "3"},
+                    {   "mDataProp": "4"},
+                    {   "mDataProp": "5"},
+                    {   "mDataProp": "6"},
+                    {   "mDataProp": "7"},
+                    {   "mDataProp": "8"},
+                    {   "mDataProp": "9"}
+
+            ],"ajax":
+                {
+                   url: 'server/consultaDatos.php',
+                    type : "POST",
+                    async: false,
+                    dataType : "json",
+                    data: { id: id },
+                    error: function(data){
+                        console.log(data.responseText);
+                    }
+                },
+            'initComplete': function (settings, json){
+                var c = 0;
+                this.api().columns().every(function(){
+                    var column = this;
+
+                    var sum = column
+                        .data()
+                        .reduce(function (a, b) {
+                           a = parseInt(a, 10);
+                           if(isNaN(a)){ a = 0; }
+
+                           b = parseInt(b, 10);
+                           if(isNaN(b)){ b = 0; }
+
+                           return a + b;
+                        });
+
+                        graf[c] = sum;
+                        c++;
+
+                    $(column.footer()).html(sum);
+                });
+                $('tfoot tr th:first').html('TOTAL');
+            },
+            "bDestroy": true
+
+        }).DataTable();
+        $('.c').css('width', '45px');
+        $('.d').css('width', '50px');
+    });
+
+    $('#myModal').modal({
+        keyboard: true
+    });
+
+    $('#myModal').find('.modal-title').html(elec);
+    $('#myModal').find('#cir').html(cir);
+    $('#myModal').find('#zon').html(zon);
+    $('#myModal').find('#rec').html(rec);
+    $('#myModal').find('#por').html(por+'%');
+
+    var ultimateColors = [
+        [
+            'rgb(0, 38, 255)',
+            'rgb(253, 202, 56)',
+            'rgb(252, 0, 0)',
+            'rgb(132, 254, 2)',
+            'rgb(55, 93, 50)'
+        ]
+    ];
+
+    var data = [{
+        values: [
+            ((graf[3]*100)/graf[6]),
+            ((graf[5]*100)/graf[6]),
+            ((graf[4]*100)/graf[6]),
+            ((graf[2]*100)/graf[6]),
+            ((graf[1]*100)/graf[6])
+        ],
+        labels: [
+            'MAS-IPSP',
+            'UD',
+            'PDC',
+            'MSM',
+            'PVB-IEP'
+            ],
+      domain: {column: 0},
+      name: '',
+      hoverinfo: 'label+percent+name',
+      hole: .4,
+      type: 'pie',
+      marker: {
+        colors: ultimateColors[0]
+      }
+    }];
+
+    var layout = {
+        title: 'Grafico',
+        height: 400,
+        width:  650
+    };
+
+    Plotly.newPlot('grafico', data, layout, {showSendToCloud:false});
+
+}
 </script>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -270,8 +447,8 @@ var chartColors = window.chartColors;
                     </tfoot>
                 </table>
 
-                <div id="canvas-holder" style="width:100%" align="center">
-                    <canvas id="chart-area"></canvas>
+                <div id="grafico">
+
                 </div>
 
             </div>
@@ -321,4 +498,3 @@ var chartColors = window.chartColors;
     }
 
 </style>
-
