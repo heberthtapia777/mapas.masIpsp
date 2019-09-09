@@ -3,7 +3,7 @@
 
     $idRecinto = $_REQUEST['id'];
     /** por el momento id del recinto 1 */
-    $idRecinto = 1;
+    //$idRecinto = 2;
 
     $idElecciones = 1;
 
