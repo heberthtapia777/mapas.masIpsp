@@ -13,7 +13,6 @@
         <link rel="stylesheet" type="text/css" href="src/leaflet-panel-layers.css">
         <link rel="stylesheet" type="text/css" href="css/myStyle.css">
         <link rel="stylesheet" type="text/css" href="css/leaflet-search.css">
-        <link rel="stylesheet" type="text/css" href="assets/sweetalert2/dist/sweetalert2.min.css">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 
@@ -24,7 +23,7 @@
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"
      type="text/javascript" ></script>
         <script src="js/leaflet-search.js" type="text/javascript"></script>
-        <script src="assets/sweetalert2/dist/sweetalert2.all.min.js" type="text/javascript"></script>
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js " type="text/javascript"></script>
@@ -52,13 +51,13 @@
                 margin:0 0 2px 18px;
             }
             .modal-md {
-                width: 700px;
+                /*width: 700px;*/
             }
             #myModal.modal{
                 left: auto;
             }
             #myModal .modal-dialog{
-                margin-right: 17px;
+                margin: 0 17px 0 0;
             }
             canvas {
                 -moz-user-select: none;
@@ -77,6 +76,14 @@
 
             }
 
+            input[type="checkbox"], input[type="radio"] {
+                margin: 1px 3px 0 0;
+            }
+
+            .leaflet-panel-layers.expanded.leaflet-control.leaflet-control-layers-expanded{
+                margin: 3px 10px 3px 0;
+            }
+
         </style>
     </head>
 <body>
@@ -93,6 +100,7 @@
     var mapa;
     var feature;
     var poligono;
+    var resintos2005;
 
     var osmBase;
     var humanitarian_layer;
@@ -113,7 +121,8 @@
         color: 'black', // color de línea
         opacity: 0.3, // tansparencia de línea
         fillColor: '#9C425C', // color de relleno
-        fillOpacity: 0.4 // transparencia de relleno
+        fillOpacity: 0.4, // transparencia de relleno
+        zindex: 0
       };
     };
 
@@ -148,6 +157,36 @@
         layers: [osmBase]
     });
 
+/**
+ * DISTRITOS
+ */
+
+var layerDistrito;
+
+$.ajax({
+    url: "distrito.geojson",
+    dataType: 'json',
+    async: false,
+    type: 'post',
+    success: function(datos){
+        // Funcion que devuelve el estilo de un poligono.
+        function popup_(feature, layer) {
+            if (feature.name) {
+                var info = feature.name;
+                layer.bindPopup(info);
+            }else if(feature){
+                layer.bindPopup(feature);
+            }
+        }
+        layerDistrito = L.geoJson(datos, {
+            color: 'blue',
+            weight: 1, // grosor de línea
+            fillColor: '#9C425C', // color de relleno
+            onEachFeature: popup_
+        });
+    }
+});
+
 function cargarMapa(){
     // Hacer llamada ajax.
     $.ajax({
@@ -167,7 +206,8 @@ function cargarMapa(){
             }
             var layerPoligonos = L.geoJson(datos, {
                 style: stylePolygon,
-                onEachFeature: popup_
+                onEachFeature: popup_,
+                transparent: true
             }).addTo(mapa);
 
             $.getJSON("server/consultaResintos.php", function(p_data_eventos){
@@ -187,10 +227,10 @@ function cargarMapa(){
                         layers.bindPopup(rec).on('click',
                             function() {
                                onClick(elec, cir, zon, rec, por, id);
-                            }).addTo(mapa);
+                            });
 
                     }
-                }).addTo(mapa);
+                });//.addTo(mapa);
 
                 /**
                  * GESTION DE COLORES
@@ -223,13 +263,13 @@ function cargarMapa(){
 
                 legend.onAdd = function (map) {
                     var div = L.DomUtil.create('div', 'info legend'),
-                        grades = [00 , 20 , 40 , 60 , 80 ],
+                        grades = [0 , 20 , 40 , 60 , 80 ],
                         labels = ['ROJO','NARANJA','AMARILLO','VERDE','AZUL'];
                     // loop through our density intervals and generate a label with a colored square for each interval
                     for (var i = 0; i < grades.length; i++) {
                         div.innerHTML +=
                             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                            grades[i] + (grades[i + 1] ? ' % &ndash; ' + grades[i + 1] + ' %<br>' : ' % +');
                     }
                     return div;
                 };
@@ -239,21 +279,172 @@ function cargarMapa(){
                  * MENU SUPERIOR
                  */
 
+                /**
+                 * [baseLayers input's ]
+                 * @type {RADIO}
+                 */
+                var baseLayers = [
+                    {
+                        group: "Tipo de Mapa",
+                        collapsed: true,
+                        layers:[
+                            {
+                                active: true,
+                                name: "Open Street Map",
+                                layer: osmBase
+                            },
+                            {
+                                active: false,
+                                name: "Humanitarian",
+                                layer: humanitarian_layer
+                            },
+                            {
+                                active: false,
+                                name: "Mapnik",
+                                layer: mapnik_layer
+                            },
+                            {
+                                active: false,
+                                name: "GoogleMaps",
+                                layer: google
+                            }
+                        ]
+                    }
+                ];
+
+                var baseLayers1 = [
+                    {
+                        group: "Poligonos",
+                        layers:[
+                            {
+                                active: true,
+                                name: "Zonas",
+                                layer: layerPoligonos
+                            },
+                            {
+                                active: false,
+                                name: "Circuncripciones",
+                                layer: layerDistrito
+                            }
+                        ]
+                    }
+                ];
+
+                var baseLayers2 = [
+                    {
+                        group: "Datos Elecciones",
+                        layers:[
+                            {
+                                active: true,
+                                name: "Resintos 2014",
+                                layer: resintos
+                            },
+                            {
+                                active: false,
+                                name: "Resintos 2005",
+                                layer: (
+                                    /**
+                                     * Elecciones 2005
+                                     */
+                                    function(){
+                                        var r = L.geoJson(p_data_eventos, {
+
+                                            pointToLayer: function(feature, latlng){
+                                                return L.circleMarker(latlng, style(feature));
+                                            },
+                                            onEachFeature: function (feature, layers) {
+                                                var elec = feature.properties.elec;
+                                                var cir = feature.properties.circunscripcion;
+                                                var zon = feature.properties.zona;
+                                                var rec = feature.properties.recinto;
+                                                var por = feature.properties.porcentaje;
+                                                var id = feature.properties.id;
+
+                                                layers.bindPopup(rec).on('click',
+                                                    function() {
+                                                       onClick('2005', cir, zon, rec, por, id);
+                                                    });
+                                            }
+
+                                        });//.addTo(mapa);
+                                        $.getJSON("server/consultaResintos.php", function(j){
+                                            r.addData(j);
+                                        });
+                                        return r;
+                                    }())
+                            }
+                        ]
+                    }
+                ];
+
+                /**
+                 * [overlayers input's]
+                 * @type {CHECKBOX}
+                 */
+                var overlayers = [];
+
+                var overlayers1 = [
+                    {
+                        active: true,
+                        name: "Resintos",
+                        layer: resintos
+                    }
+                ];
+
+                var overlayers2 = [
+                    {
+                        active: true,
+                        name: "Resintos",
+                        layer: resintos
+                    }
+                ];
+
+
+                /**
+                 *
+                 */
+
                 var baseMaps = {
-                  "OSM": osmBase,
-                  "Mapnik": mapnik_layer,
+                    /*"OSM": osmBase,*/
+                    "Resintos": resintos,
+                    "Zonas": layerPoligonos,
+                    "Distritos": layerDistrito
+
+
+                  /*"Mapnik": mapnik_layer,
                   "Humanitarian": humanitarian_layer,
-                  "google": google
+                  "google": google*/
                 };
                 overlayMaps = {
-                    "Polígono": layerPoligonos,
                     "Resintos": resintos
                 };
 
-                L.control.layers(baseMaps, overlayMaps, {
-                  position: 'topright', // 'topleft', 'bottomleft', 'bottomright'
-                  collapsed: true // true
-                }).addTo(mapa);
+                /*L.control.layers(baseMaps, overlayMaps, {
+                    position: 'topright', // 'topleft', 'bottomleft', 'bottomright'
+                    collapsed: false// true
+
+                }).addTo(mapa);*/
+
+                var panelLayers = new L.Control.PanelLayers(baseLayers, overlayers, {
+                    compact: true,
+                    //collapsed: true,
+                    collapsibleGroups: true
+                });
+                mapa.addControl(panelLayers);
+
+                var panelLayers1 = new L.Control.PanelLayers(baseLayers1, overlayers, {
+                    //compact: true,
+                    //collapsed: true,
+                    collapsibleGroups: true
+                });
+                mapa.addControl(panelLayers1);
+
+                var panelLayers2 = new L.Control.PanelLayers(baseLayers2, overlayers, {
+                    //compact: true,
+                    //collapsed: true,
+                    collapsibleGroups: true
+                });
+                mapa.addControl(panelLayers2);
 
             });
 
@@ -391,7 +582,7 @@ function onClick(elec, cir, zon, rec, por, id) {
     var layout = {
         title: 'Grafico',
         height: 400,
-        width:  650
+        width:  570
     };
 
     Plotly.newPlot('grafico', data, layout, {showSendToCloud:false});
