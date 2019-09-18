@@ -1,8 +1,10 @@
 <?php
     include '../conexion.php';
 
+    $idElec = $_REQUEST[id];
+
     // Realizar una consulta SQL
-    $sql = "SELECT *, r.name AS recinto, e.name AS eleccion FROM recinto AS r, recintoElec AS re, elecciones AS e WHERE r.idRecinto = re.idRecinto AND re.idElecciones = e.idElecciones";
+    $sql = "SELECT *, r.name AS recinto, e.name AS eleccion FROM recinto AS r, recintoElec AS re, elecciones AS e WHERE r.idRecinto = re.idRecinto AND re.idElecciones = e.idElecciones AND e.idElecciones = $idElec ";
 
     $query = $db->Execute($sql);
 
@@ -38,6 +40,7 @@
                 '@id'            => $row['idRecinto'],
                 'id'             => $row['idRecinto'],
                 'elec'           => $row['eleccion'],
+                'idElec'         => $row['idElecciones'],
                 'circunscripcion' => $row['circuns'],
                 'zona'           => $row['zona'],
                 'recinto'        => $row['recinto'],

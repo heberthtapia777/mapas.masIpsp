@@ -2,25 +2,18 @@
     include '../conexion.php';
 
     $idRecinto = $_REQUEST['id'];
+    $idElecciones = $_REQUEST['idElec'];
     /** por el momento id del recinto 1 */
     //$idRecinto = 2;
 
-    $idElecciones = 1;
+    //$idElecciones = 1;
 
     $srt = "SELECT * FROM partido WHERE idElecciones = $idElecciones";
     $con = $db->Execute($srt);
     $file = $con->FetchRow();
     $numRows = $con->recordCount();
-    $numRows = $numRows;
 
-    // Realizar una consulta SQL
-    $sql = "SELECT * FROM recinto WHERE idRecinto = $idRecinto";
-
-    $query = $db->Execute($sql);
-
-    $row = $query->FetchRow();
-
-    $sql = "SELECT * FROM mesa AS m, voto AS v WHERE m.idRecinto = $idRecinto AND m.idMesa = v.idMesa ORDER BY (v.idMesa) ASC";
+    $sql = "SELECT * FROM mesa AS m, voto AS v, recinto AS r, recintoElec AS re WHERE m.idRecinto = $idRecinto AND r.idRecinto = $idRecinto AND m.idMesa = v.idMesa AND m.idRecinto = r.idRecinto AND re.idElecciones = $idElecciones AND r.idRecinto = re.idRecinto ";
     $str = $db->Execute($sql);
 
     //print_r($str);
@@ -30,24 +23,17 @@
 
     $numMesa = $sqlMesa->recordCount();
 
-    $data = Array();
+    $data = array();
     $cant = array();
 
     while ($reg = $str->FetchRow()) {
-        $cant[0] = $reg['cantidad'];
 
-        $reg = $str->FetchRow();
-        $cant[1] = $reg['cantidad'];
-
-        $reg = $str->FetchRow();
-        $cant[2] = $reg['cantidad'];
-
-        $reg = $str->FetchRow();
-        $cant[3] = $reg['cantidad'];
-
-        $reg = $str->FetchRow();
-        $cant[4] = $reg['cantidad'];
-
+        for ($i=0; $i < $numRows; $i++) {
+            $cant[$i] = $reg['cantidad'];
+            if($i != ($numRows-1)){
+                $reg = $str->FetchRow();
+            }
+        }
 
         $data[] = array(
                 "0"=>$reg['number'],
@@ -56,19 +42,22 @@
                 "3"=>$cant[2],
                 "4"=>$cant[3],
                 "5"=>$cant[4],
-                "6"=>$reg['valido'],
-                "7"=>$reg['blanco'],
-                "8"=>$reg['nulo'],
-                "9"=>$reg['emitido']
+                "6"=>$cant[5],
+                "7"=>$cant[6],
+                "8"=>$reg['valido'],
+                "9"=>$reg['blanco'],
+                "10"=>$reg['nulo'],
+                "11"=>$reg['emitido']
             );
-        }
-        //print_r($data);
-        $results = array(
-        "sEcho" => 1,
-        "iTotalRecords" => count($data),
-        "iTotalDisplayRecords" => count($data),
-        "aaData"=>$data);
-        echo json_encode($results);
+    }
+
+    //print_r($data);
+    $results = array(
+    "sEcho" => 1,
+    "iTotalRecords" => count($data),
+    "iTotalDisplayRecords" => count($data),
+    "aaData"=>$data);
+    echo json_encode($results);
 
 
 
