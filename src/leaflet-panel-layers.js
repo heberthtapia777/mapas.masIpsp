@@ -74,7 +74,7 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 		L.Control.Layers.prototype.onAdd.call(this, map);
 
 		this._map.on('resize', function(e) {
-			self._updateHeight(e.newSize.y);
+			//self._updateHeight(e.newSize.y); //esta parate a sido comentada
 		});
 
 		return this._container;
@@ -302,7 +302,7 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 					L.DomUtil.addClass(groupdiv, 'expanded');
 					groupexp.innerHTML = ' - ';
 				}
-				self._updateHeight();
+				//self._updateHeight(); //modificado
 			});
 
 			if (isCollapsed === false)

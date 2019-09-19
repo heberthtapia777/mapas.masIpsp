@@ -44,10 +44,11 @@
                 "5"=>$cant[4],
                 "6"=>$cant[5],
                 "7"=>$cant[6],
-                "8"=>$reg['valido'],
-                "9"=>$reg['blanco'],
-                "10"=>$reg['nulo'],
-                "11"=>$reg['emitido']
+                "8"=>$cant[7],
+                "9"=>$reg['valido'],
+                "10"=>$reg['blanco'],
+                "11"=>$reg['nulo'],
+                "12"=>$reg['emitido']
             );
     }
 
