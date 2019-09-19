@@ -190,6 +190,12 @@ function general(){
     });
 }
 
+function circuns(num){
+    $('#modal'+num).modal({
+        keyboard: true
+    });
+}
+
 /**
  * CIRCUNSCRIPCIONES
  */
@@ -206,10 +212,18 @@ $.ajax({
         function popup_(feature, layer) {
             if (feature.name) {
                 var info = feature.name;
-                //layer.bindPopup(info);
+                var cir = feature.id;
                 layer.bindPopup(info).on('click',
-                    function() {
-                       general();
+                    function(){
+                        if (cir == 6) {
+                            circuns(6);
+                        }if (cir == 7) {
+                            circuns(7);
+                        }if (cir == 8) {
+                            circuns(8);
+                        }if (cir == 9) {
+                            circuns(9);
+                        }
                     }
                 );
             }else if(feature){
@@ -352,11 +366,11 @@ $.ajax({
  */
 
 function getColor(d) {
-return d > 79.9   ? '#1F90FF' :
-       d > 59.9   ? '#1CE867' :
-       d > 39.9   ? '#FBFF2C' :
-       d > 19.9   ? '#E8941C' :
-                    '#FF2B31';
+    return d > 79.9   ? '#1F90FF' :
+           d > 59.9   ? '#1CE867' :
+           d > 39.9   ? '#FBFF2C' :
+           d > 19.9   ? '#E8941C' :
+                        '#FF2B31';
 }
 
 function style(feature) {
@@ -429,7 +443,7 @@ var baseLayers = [
 
 var baseLayers1 = [
     {
-        group: "Poligonos",
+        group: "Mostrar",
         collapsed: false,
         layers:[
             {
@@ -523,19 +537,19 @@ mapa.addControl(panelLayers3);*/
 //function cargarMapa(){
     // Hacer llamada ajax.
 
-    /**
-     * Insertar Buscador al Mapa
-     */
-    mapa.addControl( new L.Control.Search({
-        url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
-        jsonpParam: 'json_callback',
-        propertyName: 'display_name',
-        propertyLoc: ['lat','lon'],
-        marker: L.circleMarker([0,0],{radius:30}),
-        autoCollapse: true,
-        autoType: false,
-        minLength: 2
-    }) );
+/**
+ * Insertar Buscador al Mapa
+ */
+mapa.addControl( new L.Control.Search({
+    url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+    jsonpParam: 'json_callback',
+    propertyName: 'display_name',
+    propertyLoc: ['lat','lon'],
+    marker: L.circleMarker([0,0],{radius:30}),
+    autoCollapse: true,
+    autoType: false,
+    minLength: 2
+}) );
 //}
 
 function onClick2005(elec, cir, zon, rec, por, id, idElec) {
@@ -547,9 +561,8 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
             "ordering": false,
             "info":     false,
             "searching": false,
-
-            scrollCollapse: true,
-            paging:         false,
+            "scrollCollapse": true,
+            "paging":         false,
             "aoColumns":[
                 {   "mDataProp": "0"},
                 {   "mDataProp": "1"},
@@ -562,7 +575,8 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
                 {   "mDataProp": "8"},
                 {   "mDataProp": "9"},
                 {   "mDataProp": "10"},
-                {   "mDataProp": "11"}
+                {   "mDataProp": "11"},
+                {   "mDataProp": "12"}
             ],"ajax":
                 {
                    url: 'server/consultaDatos2005.php',
@@ -655,9 +669,7 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
         height: 400,
         width:  570
     };
-
     Plotly.newPlot('grafico', data, layout, {showSendToCloud:false});
-
 }
 
 function onClick2014(elec, cir, zon, rec, por, id, idElec) {
@@ -784,7 +796,6 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
 
 </script>
 
-
 <!-- Modal -->
 <div class="modal fade" id="myModal2014" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-md" role="document">
@@ -798,7 +809,6 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
                 <p><strong>ZONA: </strong><span id="zon"></span></p>
                 <p><strong>RECINTO: </strong><span id="rec"></span></p>
                 <p><strong>PORCENTAJE MAS-IPSP: </strong><span id="por"></span></p>
-
 
                 <table id="datosElec2014" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" width="100%" >
                     <thead>
@@ -846,7 +856,7 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
 
 <!-- Modal -->
 <div class="modal fade" id="myModal2005" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -863,13 +873,14 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
                     <thead>
                         <tr>
                             <th id="m">MESA</th>
-                            <th class="c">PVB-IEP</th>
-                            <th>MSM</th>
-                            <th class="d">MAS-IPSP</th>
-                            <th>PDC</th>
-                            <th>UD</th>
-                            <th>fgfg</th>
-                            <th>fgfd</th>
+                            <th class="c">MAS-IPSP</th>
+                            <th>PODEMOS</th>
+                            <th>FREPAB</th>
+                            <th>NFR</th>
+                            <th>UN</th>
+                            <th>USTB</th>
+                            <th>MNR</th>
+                            <th>MIP</th>
                             <th>VALIDOS</th>
                             <th>BLANCOS</th>
                             <th>NULOS</th>
@@ -879,6 +890,7 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
 
                     <tfoot>
                         <tr>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -907,56 +919,10 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
     </div>
 </div>
 
-<!-- Modal Datos demograficos generales-->
-<div class="modal fade" id="modalGeneral" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Dastos Demograficos</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <a class="example-image-link" href="DEMOGRAFICOS/general/01 POBLACION POR SEXO LA PAZ.jpg" data-lightbox="example-set" data-title="POBLACION POR SEXO LA PAZ.">
-                            <img src="DEMOGRAFICOS/general/01 POBLACION POR SEXO LA PAZ.jpg" class="img-responsive" alt="Responsive image">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="example-image-link" href="DEMOGRAFICOS/general/02 PIRAMIDE POBLACIONAL.jpg" data-lightbox="example-set" data-title="Click PIRAMIDE POBLACIONAL.">
-                            <img src="DEMOGRAFICOS/general/02 PIRAMIDE POBLACIONAL.jpg" class="img-responsive" alt="Responsive image">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="example-image-link" href="DEMOGRAFICOS/general/03 POBLACION POR EDAD AMBOS SEXOS.jpg" data-lightbox="example-set" data-title="POBLACION POR EDAD AMBOS SEXOS.">
-                            <img src="DEMOGRAFICOS/general/03 POBLACION POR EDAD AMBOS SEXOS.jpg" class="img-responsive" alt="Responsive image">
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <a class="example-image-link" href="DEMOGRAFICOS/general/04 SALUD.jpg" data-lightbox="example-set" data-title="Salud.">
-                            <img src="DEMOGRAFICOS/general/04 SALUD.jpg" class="img-responsive" alt="Responsive image">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="example-image-link" href="DEMOGRAFICOS/general/05 EDUCACION.jpg" data-lightbox="example-set" data-title="Educación.">
-                            <img src="DEMOGRAFICOS/general/05 EDUCACION.jpg" class="img-responsive" alt="Responsive image">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a class="example-image-link" href="DEMOGRAFICOS/general/06 VIVIENDA.jpg" data-lightbox="example-set" data-title="Vivienda.">
-                            <img src="DEMOGRAFICOS/general/06 VIVIENDA.jpg" class="img-responsive" alt="Responsive image">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Modal Datos Demograficos Circunscripciones -->
+<?php
+    require_once 'modal/circunscripcion.php';
+?>
 
 <style type="text/css" media="screen">
    body {
