@@ -5,96 +5,43 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Mapa Detalle Votos</title>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
-        <link rel="stylesheet" type="text/css" href="css/font-awesome/css/all.css">
-        <link rel="stylesheet" type="text/css" href="src/leaflet-panel-layers.css">
-        <link rel="stylesheet" type="text/css" href="css/myStyle.css">
-        <link rel="stylesheet" type="text/css" href="css/leaflet-search.css">
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
+<head>
+    <title>Mapa Detalle Votos</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="src/leaflet-panel-layers.css">
+    <link rel="stylesheet" type="text/css" href="css/leaflet-search.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 
-        <!-- Make sure you put this AFTER Leaflet's CSS -->
-        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin=""></script>
-        <script src="src/leaflet-panel-layers.js" type="text/javascript" ></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript" ></script>
-        <script src="js/leaflet-search.js" type="text/javascript"></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin=""></script>
+    <script src="src/leaflet-panel-layers.js" type="text/javascript" ></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript" ></script>
+    <script src="js/leaflet-search.js" type="text/javascript"></script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js " type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js " type="text/javascript"></script>
 
-        <!-- Plotly.js -->
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <!-- Numeric JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Numeric JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <!-- lightbox -->
+    <script type="text/javascript" src="js/lightbox.js"></script>
 
-        <script type="text/javascript" src="js/lightbox.js"></script>
+    <style>
 
-        <style>
-            .search-input {
-                font-family:Courier
-            }
-            .search-input,
-            .leaflet-control-search {
-                max-width:400px;
-            }
 
-            ul {
-                font-size:.85em;
-                margin:0;
-                padding:0;
-            }
-            li {
-                margin:0 0 2px 18px;
-            }
-            .modal-md {
-                width: 700px;
-            }
-            #myModal2014.modal,
-            #myModal2005.modal{
-                left: auto;
-            }
-            #myModal2014 .modal-dialog,
-            #myModal2005 .modal-dialog{
-                margin: 0 17px 0 0;
-            }
-            canvas {
-                -moz-user-select: none;
-                -webkit-user-select: none;
-                -ms-user-select: none;
-            }
-            table#datosElec{
-                font-size: 12px;
-            }
-            .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-
-                padding: 5px;
-                line-height: 1.42857143;
-                vertical-align: top;
-                border-top: 1px solid #ddd;
-
-            }
-
-            input[type="checkbox"], input[type="radio"] {
-                margin: 1px 3px 0 0;
-            }
-
-            .leaflet-panel-layers.expanded.leaflet-control.leaflet-control-layers-expanded{
-                margin: 3px 10px 3px 0;
-            }
-
-            .row {
-                margin: 5px -15px 0 0;
-            }
-
-        </style>
-    </head>
+    </style>
+</head>
 <body>
+
     <div class="row">
         <div class="col-md-12 left">
             <button type="button" id="myButton" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
@@ -134,6 +81,9 @@
     var markerAux = new Array();
 
     var graf = new Array();
+
+    var elecPor = new Array();
+    var elecNum = new Array();
 
     function stylePolygon(feature) {
       return {
@@ -298,6 +248,36 @@ $.ajax({
     }).addTo(mapa);
 });*/
 
+$.ajax({
+    url: "server/consultaResintos.php?id=3",
+    dataType: 'json',
+    async: false,
+    type: 'post',
+    success: function(datos){
+        resintos2009 = L.geoJson(datos, {
+            pointToLayer: function(feature, latlng){
+                return L.circleMarker(latlng, style(feature));
+            },
+            onEachFeature: function (feature, layers) {
+                var elec   = feature.properties.elec;
+                var cir    = feature.properties.circunscripcion;
+                var zon    = feature.properties.zona;
+                var rec    = feature.properties.recinto;
+                var por    = feature.properties.porcentaje;
+                var id     = feature.properties.id;
+                var idElec = feature.properties.idElec;
+
+                layers.bindPopup(rec).on('click',
+                    function() {
+                       onClick2009(elec, cir, zon, rec, por, id, idElec);
+                    });
+            }
+        });//.addTo(mapa);
+    },
+    error: function(msgj) {
+        console.log("Error!!!");
+    }
+});
 
 $.ajax({
     url: "server/consultaResintos.php?id=2",
@@ -472,6 +452,11 @@ var baseLayers2 = [
             },
             {
                 active: false,
+                name: "Resintos 2009",
+                layer: resintos2009
+            },
+            {
+                active: false,
                 name: "Resintos 2014",
                 layer: resintos2014
             }
@@ -550,7 +535,7 @@ mapa.addControl( new L.Control.Search({
     autoType: false,
     minLength: 2
 }) );
-//}
+
 
 function onClick2005(elec, cir, zon, rec, por, id, idElec) {
     $('#myModal2005').on('show.bs.modal', function() {
@@ -606,6 +591,7 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
                         });
 
                         graf[c] = sum;
+                        //alert(graf[c]);
                         c++;
 
                     $(column.footer()).html(sum);
@@ -632,27 +618,36 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
     var ultimateColors = [
         [
             'rgb(0, 38, 255)',
-            'rgb(253, 202, 56)',
-            'rgb(252, 0, 0)',
-            'rgb(132, 254, 2)',
-            'rgb(55, 93, 50)'
+            'rgb(255, 0, 0)',
+            'rgb(255, 255, 255)',
+            'rgb(128, 0, 255)',
+            'rgb(255, 215, 0)',
+            'rgb(128, 0, 128)',
+            'rgb(255, 192, 203)',
+            'rgb(165, 42, 42)'
         ]
     ];
 
     var data = [{
         values: [
-            ((graf[3]*100)/graf[6]),
-            ((graf[5]*100)/graf[6]),
-            ((graf[4]*100)/graf[6]),
-            ((graf[2]*100)/graf[6]),
-            ((graf[1]*100)/graf[6])
+            ((graf[1]*100)/graf[9]),
+            ((graf[2]*100)/graf[9]),
+            ((graf[3]*100)/graf[9]),
+            ((graf[4]*100)/graf[9]),
+            ((graf[5]*100)/graf[9]),
+            ((graf[6]*100)/graf[9]),
+            ((graf[7]*100)/graf[9]),
+            ((graf[8]*100)/graf[9])
         ],
         labels: [
             'MAS-IPSP',
-            'UD',
-            'PDC',
-            'MSM',
-            'PVB-IEP'
+            'PODEMOS',
+            'FREPAB',
+            'NFR',
+            'UN',
+            'USTB',
+            'MNR',
+            'MIP'
             ],
       domain: {column: 0},
       name: '',
@@ -665,11 +660,246 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
     }];
 
     var layout = {
-        title: 'Grafico',
+        title: 'Grafica',
         height: 400,
         width:  570
     };
-    Plotly.newPlot('grafico', data, layout, {showSendToCloud:false});
+    Plotly.newPlot('grafico2005', data, layout, {showSendToCloud:false});
+
+    $.ajax({
+        url: 'server/comparacion.php',
+        type: "post",
+        dataType: "json",
+        data: {id: id},
+    })
+    .done(function(data) {
+
+        for (var i = 0 ; i < data.num; i++) {
+            elecPor[i] = data.por[i];
+            if (data.elec[i] == 2) {
+                elecNum[i] = '2005';
+            }
+            if (data.elec[i] == 3) {
+                elecNum[i] = '2009';
+            }
+            if (data.elec[i] == 1) {
+                elecNum[i] = '2014';
+            }
+
+        }
+
+        var colors = [
+        [
+            'rgb(0, 38, 255)',
+            'rgb(116, 191, 4)',
+            'rgb(242, 116, 5)'
+        ]
+    ];
+
+        var trace1 = {
+            type: 'bar',
+            x: elecNum,
+            y: elecPor,
+            marker: {
+                color: colors[0],
+                line: {
+                    width: 1.5
+                }
+            }
+        };
+
+        var data = [ trace1 ];
+
+        var layout1 = {
+          title: 'Comparación (%)',
+          font: {size: 18}
+        };
+
+        Plotly.newPlot('com2005', data, layout1, {responsive: true});
+
+    })
+
+}
+
+function onClick2009(elec, cir, zon, rec, por, id, idElec) {
+    $('#myModal2009').on('show.bs.modal', function() {
+        $tabla = $('#datosElec2009').dataTable({
+            "aProcessing": true,
+            "aServerSide": true,
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "searching": false,
+            "scrollCollapse": true,
+            "paging":         false,
+            "aoColumns":[
+                {   "mDataProp": "0"},
+                {   "mDataProp": "1"},
+                {   "mDataProp": "2"},
+                {   "mDataProp": "3"},
+                {   "mDataProp": "4"},
+                {   "mDataProp": "5"},
+                {   "mDataProp": "6"},
+                {   "mDataProp": "7"},
+                {   "mDataProp": "8"},
+                {   "mDataProp": "9"},
+                {   "mDataProp": "10"},
+                {   "mDataProp": "11"},
+                {   "mDataProp": "12"}
+            ],"ajax":
+                {
+                   url: 'server/consultaDatos2009.php',
+                    type : "POST",
+                    async: false,
+                    dataType : "json",
+                    data: { id: id, idElec: idElec },
+                    error: function(data){
+                        console.log(data.responseText);
+                    }
+                },
+            'initComplete': function (settings, json){
+                var c = 0;
+                this.api().columns().every(function(){
+                    var column = this;
+
+                    var sum = column
+                        .data()
+                        .reduce(function (a, b) {
+                           a = parseInt(a, 10);
+                           if(isNaN(a)){ a = 0; }
+
+                           b = parseInt(b, 10);
+                           if(isNaN(b)){ b = 0; }
+
+                           return a + b;
+                        });
+
+                        graf[c] = sum;
+                        c++;
+
+                    $(column.footer()).html(sum);
+                });
+                $('#datosElec2009 tfoot tr th:first').html('TOTAL');
+            },
+            "bDestroy": true
+
+        }).DataTable();
+        $('.c').css('width', '45px');
+        $('.d').css('width', '50px');
+    });
+
+    $('#myModal2009').modal({
+        keyboard: true
+    });
+
+    $('#myModal2009').find('.modal-title').html(elec);
+    $('#myModal2009').find('#cir').html(cir);
+    $('#myModal2009').find('#zon').html(zon);
+    $('#myModal2009').find('#rec').html(rec);
+    $('#myModal2009').find('#por').html(por+'%');
+
+    var ultimateColors = [
+        [
+            'rgb(128, 128, 128)',
+            'rgb(0, 38, 255)',
+            'rgb(255, 165, 0)',
+            'rgb(139, 0, 0)',
+            'rgb(255, 215, 0)',
+            'rgb(255, 0, 0)',
+            'rgb(255, 192, 203)',
+            'rgb(0, 128, 0)'
+        ]
+    ];
+
+    var data = [{
+        values: [
+            ((graf[1]*100)/graf[9]),
+            ((graf[2]*100)/graf[9]),
+            ((graf[3]*100)/graf[9]),
+            ((graf[4]*100)/graf[9]),
+            ((graf[5]*100)/graf[9]),
+            ((graf[6]*100)/graf[9]),
+            ((graf[7]*100)/graf[9]),
+            ((graf[8]*100)/graf[9])
+        ],
+        labels: [
+            'BSD',
+            'MAS-IPSP',
+            'MUSPA',
+            'PULSO',
+            'UN',
+            'PPB-CN',
+            'GENTE',
+            'AS'
+            ],
+      domain: {column: 0},
+      name: '',
+      hoverinfo: 'label+percent+name',
+      hole: .4,
+      type: 'pie',
+      marker: {
+        colors: ultimateColors[0]
+      }
+    }];
+
+    var layout = {
+        title: 'Grafica',
+        height: 400,
+        width:  570
+    };
+    Plotly.newPlot('grafico2009', data, layout, {showSendToCloud:false});
+
+    $.ajax({
+        url: 'server/comparacion.php',
+        type: "post",
+        dataType: "json",
+        data: {id: id},
+    })
+    .done(function(data) {
+
+        for (var i = 0 ; i < data.num; i++) {
+            elecPor[i] = data.por[i];
+            if (data.elec[i] == 2) {
+                elecNum[i] = '2005';
+            }
+            if (data.elec[i] == 3) {
+                elecNum[i] = '2009';
+            }
+            if (data.elec[i] == 1) {
+                elecNum[i] = '2014';
+            }
+
+        }
+
+        var colors = [
+        [
+            'rgb(0, 38, 255)',
+            'rgb(116, 191, 4)',
+            'rgb(242, 116, 5)'
+        ]
+    ];
+
+        var trace1 = {
+            type: 'bar',
+            x: elecNum,
+            y: elecPor,
+            marker: {
+                color: colors[0],
+                line: {
+                    width: 1.5
+                }
+            }
+        };
+
+        var data = [ trace1 ];
+
+        var layout1 = {
+          title: 'Comparación (%)',
+          font: {size: 18}
+        };
+
+        Plotly.newPlot('com2009', data, layout1, {responsive: true});
+    })
 }
 
 function onClick2014(elec, cir, zon, rec, por, id, idElec) {
@@ -784,66 +1014,135 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
     }];
 
     var layout = {
-        title: 'Grafico',
+        title: 'Grafica',
         height: 400,
         width:  570
     };
 
-    Plotly.newPlot('grafico', data, layout, {showSendToCloud:false});
+    Plotly.newPlot('grafico2014', data, layout, {showSendToCloud:false});
 
+    $.ajax({
+        url: 'server/comparacion.php',
+        type: "post",
+        dataType: "json",
+        data: {id: id},
+    })
+    .done(function(data) {
+
+        for (var i = 0 ; i < data.num; i++) {
+            elecPor[i] = data.por[i];
+            if (data.elec[i] == 2) {
+                elecNum[i] = '2005';
+            }
+            if (data.elec[i] == 3) {
+                elecNum[i] = '2009';
+            }
+            if (data.elec[i] == 1) {
+                elecNum[i] = '2014';
+            }
+
+        }
+
+        var colors = [
+        [
+            'rgb(0, 38, 255)',
+            'rgb(116, 191, 4)',
+            'rgb(242, 116, 5)'
+        ]
+    ];
+
+        var trace1 = {
+            type: 'bar',
+            x: elecNum,
+            y: elecPor,
+            marker: {
+                color: colors[0],
+                line: {
+                    width: 1.5
+                }
+            }
+        };
+
+        var data = [ trace1 ];
+
+        var layout1 = {
+          title: 'Comparación (%)',
+          font: {size: 18}
+        };
+
+        Plotly.newPlot('com2014', data, layout1, {responsive: true});
+    })
 }
-
 
 </script>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal2014" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-md" role="document">
+<div class="modal fade" id="myModal2005" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <p><strong>CIRCUNSCRIPCION: </strong><span id="cir"></span></p>
-                <p><strong>ZONA: </strong><span id="zon"></span></p>
-                <p><strong>RECINTO: </strong><span id="rec"></span></p>
-                <p><strong>PORCENTAJE MAS-IPSP: </strong><span id="por"></span></p>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#vot2005" aria-controls="vot2005" role="tab" data-toggle="tab">Votación</a></li>
+                    <li role="presentation"><a href="#com2005" aria-controls="com2005" role="tab" data-toggle="tab">Comparar</a></li>
+                </ul>
 
-                <table id="datosElec2014" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" width="100%" >
-                    <thead>
-                        <tr>
-                            <th id="m">MESA</th>
-                            <th class="c">PVB-IEP</th>
-                            <th>MSM</th>
-                            <th class="d">MAS-IPSP</th>
-                            <th>PDC</th>
-                            <th>UD</th>
-                            <th>VALIDOS</th>
-                            <th>BLANCOS</th>
-                            <th>NULOS</th>
-                            <th>EMITIDOS</th>
-                        </tr>
-                    </thead>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="vot2005">
+                        <br>
+                        <p><strong>CIRCUNSCRIPCION: </strong><span id="cir"></span></p>
+                        <p><strong>ZONA: </strong><span id="zon"></span></p>
+                        <p><strong>RECINTO: </strong><span id="rec"></span></p>
+                        <p><strong>PORCENTAJE MAS-IPSP: </strong><span id="por"></span></p>
 
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        <table id="datosElec2005" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" width="100%" >
+                            <thead>
+                                <tr>
+                                    <th id="m">MESA</th>
+                                    <th class="c">MAS-IPSP</th>
+                                    <th>PODEMOS</th>
+                                    <th>FREPAB</th>
+                                    <th>NFR</th>
+                                    <th>UN</th>
+                                    <th>USTB</th>
+                                    <th>MNR</th>
+                                    <th>MIP</th>
+                                    <th>VALIDOS</th>
+                                    <th>BLANCOS</th>
+                                    <th>NULOS</th>
+                                    <th>EMITIDOS</th>
+                                </tr>
+                            </thead>
 
-                <div id="grafico">
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
 
+                        <div id="grafico2005" align="center"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="com2005" align="center">
+
+                    </div>
                 </div>
 
             </div>
@@ -855,7 +1154,7 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal2005" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal2009" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -863,54 +1162,133 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <p><strong>CIRCUNSCRIPCION: </strong><span id="cir"></span></p>
-                <p><strong>ZONA: </strong><span id="zon"></span></p>
-                <p><strong>RECINTO: </strong><span id="rec"></span></p>
-                <p><strong>PORCENTAJE MAS-IPSP: </strong><span id="por"></span></p>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#vot2009" aria-controls="vot2009" role="tab" data-toggle="tab">Votación</a></li>
+                    <li role="presentation"><a href="#com2009" aria-controls="com2009" role="tab" data-toggle="tab">Comparar</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="vot2009">
+                        <br>
+                        <p><strong>CIRCUNSCRIPCION: </strong><span id="cir"></span></p>
+                        <p><strong>ZONA: </strong><span id="zon"></span></p>
+                        <p><strong>RECINTO: </strong><span id="rec"></span></p>
+                        <p><strong>PORCENTAJE MAS-IPSP: </strong><span id="por"></span></p>
 
 
-                <table id="datosElec2005" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" width="100%" >
-                    <thead>
-                        <tr>
-                            <th id="m">MESA</th>
-                            <th class="c">MAS-IPSP</th>
-                            <th>PODEMOS</th>
-                            <th>FREPAB</th>
-                            <th>NFR</th>
-                            <th>UN</th>
-                            <th>USTB</th>
-                            <th>MNR</th>
-                            <th>MIP</th>
-                            <th>VALIDOS</th>
-                            <th>BLANCOS</th>
-                            <th>NULOS</th>
-                            <th>EMITIDOS</th>
-                        </tr>
-                    </thead>
+                        <table id="datosElec2009" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" width="100%" >
+                            <thead>
+                                <tr>
+                                    <th id="m">MESA</th>
+                                    <th class="c">BSD</th>
+                                    <th>MAS-IPSP</th>
+                                    <th>MUSPA</th>
+                                    <th>PULSO</th>
+                                    <th>UN</th>
+                                    <th>PPB-CN</th>
+                                    <th>GENTE</th>
+                                    <th>AS</th>
+                                    <th>VALIDOS</th>
+                                    <th>BLANCOS</th>
+                                    <th>NULOS</th>
+                                    <th>EMITIDOS</th>
+                                </tr>
+                            </thead>
 
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
 
-                <div id="grafico">
-
+                        <div id="grafico2009" align="center"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="com2009" align="center"></div>
                 </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal2014" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#vot2014" aria-controls="vot2014" role="tab" data-toggle="tab">Votación</a></li>
+                    <li role="presentation"><a href="#com2014" aria-controls="com2014" role="tab" data-toggle="tab">Comparar</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="vot2014">
+                        <br>
+                        <p><strong>CIRCUNSCRIPCION: </strong><span id="cir"></span></p>
+                        <p><strong>ZONA: </strong><span id="zon"></span></p>
+                        <p><strong>RECINTO: </strong><span id="rec"></span></p>
+                        <p><strong>PORCENTAJE MAS-IPSP: </strong><span id="por"></span></p>
+
+                        <table id="datosElec2014" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" width="100%" >
+                            <thead>
+                                <tr>
+                                    <th id="m">MESA</th>
+                                    <th class="c">PVB-IEP</th>
+                                    <th>MSM</th>
+                                    <th class="d">MAS-IPSP</th>
+                                    <th>PDC</th>
+                                    <th>UD</th>
+                                    <th>VALIDOS</th>
+                                    <th>BLANCOS</th>
+                                    <th>NULOS</th>
+                                    <th>EMITIDOS</th>
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div id="grafico2014" align="center"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="com2014" align="center"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -924,36 +1302,3 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
     require_once 'modal/circunscripcion.php';
 ?>
 
-<style type="text/css" media="screen">
-   body {
-        margin: 0;
-        padding: 0;
-    }
-
-    .info {
-        padding: 6px 8px;
-        font: 14px/16px Arial, Helvetica, sans-serif;
-        background: white;
-        background: rgba(255,255,255,0.8);
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        border-radius: 5px;
-    }
-    .info h4 {
-        margin: 0 0 5px;
-        color: #777;
-    }
-
-    .legend {
-        line-height: 18px;
-        color: #555;
-        background-color: white;
-    }
-    .legend i {
-        width: 18px;
-        height: 18px;
-        float: left;
-        margin-right: 8px;
-        opacity: 0.7;
-    }
-
-</style>

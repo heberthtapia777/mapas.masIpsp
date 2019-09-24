@@ -3,6 +3,8 @@
 
     $idElec = $_REQUEST[id];
 
+    //$idElec = 3;
+
     // Realizar una consulta SQL
     $sql = "SELECT *, r.name AS recinto, e.name AS eleccion FROM recinto AS r, recintoElec AS re, elecciones AS e WHERE r.idRecinto = re.idRecinto AND re.idElecciones = e.idElecciones AND e.idElecciones = $idElec ";
 

@@ -13,7 +13,7 @@
 
 	$pwd   = urlencode('mysql');
 	$flags =  MYSQL_CLIENT_COMPRESS;
-	$dsn   = "mysqli://root:$pwd@localhost/bd_mapaMilitantes?persist&clientflags=$flags";
+	$dsn   = "mysqli://root:$pwd@localhost/bd_mapaMilitantes_full?persist&clientflags=$flags";
 	$db    = ADONewConnection($dsn);  # no need for PConnect()
 	if (!$db) die("Conexion incorrecta");
 ?>
