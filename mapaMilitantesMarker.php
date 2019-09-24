@@ -689,12 +689,12 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
         }
 
         var colors = [
-        [
-            'rgb(0, 38, 255)',
-            'rgb(116, 191, 4)',
-            'rgb(242, 116, 5)'
-        ]
-    ];
+            [
+                'rgb(0, 38, 255)',
+                'rgb(116, 191, 4)',
+                'rgb(242, 116, 5)'
+            ]
+        ];
 
         var trace1 = {
             type: 'bar',
@@ -708,10 +708,12 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
             }
         };
 
+        var titulo = 'Comparación <br> Promedio '+data.media+' %';
+
         var data = [ trace1 ];
 
         var layout1 = {
-          title: 'Comparación (%)',
+          title: titulo,
           font: {size: 18}
         };
 
@@ -872,12 +874,12 @@ function onClick2009(elec, cir, zon, rec, por, id, idElec) {
         }
 
         var colors = [
-        [
-            'rgb(0, 38, 255)',
-            'rgb(116, 191, 4)',
-            'rgb(242, 116, 5)'
-        ]
-    ];
+            [
+                'rgb(0, 38, 255)',
+                'rgb(116, 191, 4)',
+                'rgb(242, 116, 5)'
+            ]
+        ];
 
         var trace1 = {
             type: 'bar',
@@ -891,10 +893,12 @@ function onClick2009(elec, cir, zon, rec, por, id, idElec) {
             }
         };
 
+        var titulo = 'Comparación <br> Promedio '+data.media+' %';
+
         var data = [ trace1 ];
 
         var layout1 = {
-          title: 'Comparación (%)',
+          title: titulo,
           font: {size: 18}
         };
 
@@ -1044,12 +1048,12 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
         }
 
         var colors = [
-        [
-            'rgb(0, 38, 255)',
-            'rgb(116, 191, 4)',
-            'rgb(242, 116, 5)'
-        ]
-    ];
+            [
+                'rgb(0, 38, 255)',
+                'rgb(116, 191, 4)',
+                'rgb(242, 116, 5)'
+            ]
+        ];
 
         var trace1 = {
             type: 'bar',
@@ -1062,11 +1066,11 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
                 }
             }
         };
-
+        var titulo = 'Comparación <br> Promedio '+data.media+' %';
         var data = [ trace1 ];
 
         var layout1 = {
-          title: 'Comparación (%)',
+          title: titulo,
           font: {size: 18}
         };
 

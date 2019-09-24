@@ -22,12 +22,18 @@
     $data = json_decode($data);
 
     $c = 0;
+    $sum = 0;
 
     while ($row = $query->FetchRow()) {
         $data->por[$c] = $row['porcentaje'];
         $data->elec[$c] = $row['idElecciones'];
+
+        $sum = $sum + $data->por[$c];
         $c++;
     }
+    $pro = ($sum / $numRows);
+
+    $data->media = round($pro, 2);
 
     $data->num = $numRows;
 
