@@ -685,7 +685,13 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
             if (data.elec[i] == 1) {
                 elecNum[i] = '2014';
             }
-
+        }
+        if (data.num == 1) {
+            elecPor[1] = 0;
+            elecPor[2] = 0;
+        }
+        if(data.num == 2){
+            elecPor[2] = 0;
         }
 
         var colors = [
@@ -696,10 +702,11 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
             ]
         ];
 
-        var trace1 = {
-            type: 'bar',
-            x: elecNum,
+        var trace2005 = {
+           type: 'bar',
+            x: [2005, 2009, 2014],
             y: elecPor,
+            width: [1,1,1],
             marker: {
                 color: colors[0],
                 line: {
@@ -710,14 +717,36 @@ function onClick2005(elec, cir, zon, rec, por, id, idElec) {
 
         var titulo = 'Comparación <br> Promedio '+data.media+' %';
 
-        var data = [ trace1 ];
+        var data2005 = [ trace2005 ];
 
-        var layout1 = {
-          title: titulo,
-          font: {size: 18}
+        var layout2005 = {
+            title: titulo,
+            font: {size: 18},
+            xaxis: {
+                title: 'Elecciones Generales',
+                titlefont: {
+                size: 16,
+                color: 'rgb(107, 107, 107)'
+                },
+                tickfont: {
+                    size: 14,
+                    color: 'rgb(107, 107, 107)'
+                }
+            },
+            yaxis: {
+                title: 'Porcentaje (%)',
+                titlefont: {
+                size: 16,
+                color: 'rgb(107, 107, 107)'
+                },
+                tickfont: {
+                    size: 14,
+                    color: 'rgb(107, 107, 107)'
+                }
+            }
         };
 
-        Plotly.newPlot('com2005', data, layout1, {responsive: true});
+        Plotly.newPlot('com2005', data2005, layout2005, {responsive: true});
 
     })
 
@@ -870,7 +899,13 @@ function onClick2009(elec, cir, zon, rec, por, id, idElec) {
             if (data.elec[i] == 1) {
                 elecNum[i] = '2014';
             }
-
+        }
+        if (data.num == 1) {
+            elecPor[1] = 0;
+            elecPor[2] = 0;
+        }
+        if(data.num == 2){
+            elecPor[2] = 0;
         }
 
         var colors = [
@@ -881,10 +916,11 @@ function onClick2009(elec, cir, zon, rec, por, id, idElec) {
             ]
         ];
 
-        var trace1 = {
+        var trace2009 = {
             type: 'bar',
-            x: elecNum,
+            x: [2005, 2009, 2014],
             y: elecPor,
+            width: [1,1,1],
             marker: {
                 color: colors[0],
                 line: {
@@ -895,14 +931,39 @@ function onClick2009(elec, cir, zon, rec, por, id, idElec) {
 
         var titulo = 'Comparación <br> Promedio '+data.media+' %';
 
-        var data = [ trace1 ];
+        var data2009 = [ trace2009 ];
 
-        var layout1 = {
+        var layout2009 = {
           title: titulo,
-          font: {size: 18}
+            font: {size: 18},
+            xaxis: {
+                title: 'Elecciones Generales',
+                titlefont: {
+                size: 16,
+                color: 'rgb(107, 107, 107)'
+                },
+                tickfont: {
+                    size: 14,
+                    color: 'rgb(107, 107, 107)'
+                }
+            },
+            yaxis: {
+                title: 'Porcentaje (%)',
+                titlefont: {
+                size: 16,
+                color: 'rgb(107, 107, 107)'
+                },
+                tickfont: {
+                    size: 14,
+                    color: 'rgb(107, 107, 107)'
+                }
+            }
         };
 
-        Plotly.newPlot('com2009', data, layout1, {responsive: true});
+        $('#com2009').html('');
+
+        Plotly.newPlot('com2009', data2009, layout2009, {responsive: true});
+        //Plotly.deleteTraces(com2009, 0);
     })
 }
 
@@ -1044,7 +1105,13 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
             if (data.elec[i] == 1) {
                 elecNum[i] = '2014';
             }
-
+        }
+        if (data.num == 1) {
+            elecPor[1] = 0;
+            elecPor[2] = 0;
+        }
+        if(data.num == 2){
+            elecPor[2] = 0;
         }
 
         var colors = [
@@ -1055,10 +1122,11 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
             ]
         ];
 
-        var trace1 = {
+        var trace2014 = {
             type: 'bar',
             x: elecNum,
             y: elecPor,
+            width: [1, 1, 1],
             marker: {
                 color: colors[0],
                 line: {
@@ -1067,14 +1135,36 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
             }
         };
         var titulo = 'Comparación <br> Promedio '+data.media+' %';
-        var data = [ trace1 ];
+        var data2014 = [ trace2014 ];
 
-        var layout1 = {
-          title: titulo,
-          font: {size: 18}
+        var layout2014 = {
+            title: titulo,
+            font: {size: 18},
+            xaxis: {
+                title: 'Elecciones Generales',
+                titlefont: {
+                size: 16,
+                color: 'rgb(107, 107, 107)'
+                },
+                tickfont: {
+                    size: 14,
+                    color: 'rgb(107, 107, 107)'
+                }
+            },
+            yaxis: {
+                title: 'Porcentaje (%)',
+                titlefont: {
+                size: 16,
+                color: 'rgb(107, 107, 107)'
+                },
+                tickfont: {
+                    size: 14,
+                    color: 'rgb(107, 107, 107)'
+                }
+            }
         };
 
-        Plotly.newPlot('com2014', data, layout1, {responsive: true});
+        Plotly.newPlot('com2014', data2014, layout2014, {responsive: true});
     })
 }
 
