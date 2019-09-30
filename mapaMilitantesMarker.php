@@ -1093,26 +1093,39 @@ function onClick2014(elec, cir, zon, rec, por, id, idElec) {
         data: {id: id},
     })
     .done(function(data) {
+        elecPor[0] = 0;
+    elecPor[1] = 0;
+    elecPor[2] = 0;
 
         for (var i = 0 ; i < data.num; i++) {
-            elecPor[i] = data.por[i];
+            //elecPor[i] = data.por[i];
+
             if (data.elec[i] == 2) {
-                elecNum[i] = '2005';
+                elecPor[0] = data.por[i];
+            } else {
+                if (data.elec[i] == 3) {
+                    elecPor[1] = data.por[i];
+                }else{
+                    if (data.elec[i] == 1) {
+                        elecPor[2] = data.por[i];
+                    }
+                }
+
             }
-            if (data.elec[i] == 3) {
-                elecNum[i] = '2009';
-            }
-            if (data.elec[i] == 1) {
-                elecNum[i] = '2014';
-            }
+
         }
-        if (data.num == 1) {
+
+        elecNum[0] = '2005';
+        elecNum[1] = '2009';
+        elecNum[2] = '2014';
+
+        /*if (data.num == 1) {
             elecPor[1] = 0;
             elecPor[2] = 0;
         }
         if(data.num == 2){
             elecPor[2] = 0;
-        }
+        }*/
 
         var colors = [
             [
